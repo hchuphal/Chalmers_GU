@@ -1,0 +1,6 @@
+Instalation steps:
+
+1. Download ConTest from IBM pages.
+2. Add ConTest.jar to the lib subdirectory.
+3. Add KingProperties file into the root directory of Race Detector & Healer.
+

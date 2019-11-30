@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head></head>
+<body bgcolor="white">
+
+<h1>Race detector for IBM ConTest</h1>
+
+<H2>What is a data race?</H2>
+<P>A data race occurs when two concurrent threads access a shared
+variable and when: 
+</P>
+<UL>
+	<LI>at least one access is a write <B>and</B>
+	<LI>the threads use no explicit mechanism to prevent the accesses
+	from being simultaneous. 
+</UL>
+<P>Usually a data race is a serious error caused by failure to
+synchronize properly. 
+</P>
+<H2>What is an atomicity violation?</H2>
+<P>Atomicity violation occurs if a block of code that operates with
+some variable and is intended to be executed without unwanted
+inference with other running threads is interleaved by some other
+thread which touches the variable and so causes such unwanted
+inference. For example, when one thread is executing a block of code
+incrementing a variable x (x++;),
+other threads should not change the value of x.</P>
+
+<H2>Eraser algorithm</H2>
+<P>Race Detection &amp; Healing tool can use modified version of the Eraser algorithm to
+detect violations in a locking policy. It is simply trying to
+identify which lock is used to protect a shared variable. If some
+thread access a shared variable without a proper lock, a race warning
+is logged. Eraser also tries to identify the lock which should be
+used with the shared variable and suggests to programmer to use it.
+Eraser maintains for each shared variable a set of locks used with
+it. The set is build since the variable becomes shared. If the set
+becomes empty the race warning is produced. 
+</P>
+<P>Eraser algorithms does not supports other
+than <I>synchronized{}</I> based, <I>Thread.join()</I> based synchronization
+primitives. 
+</P>
+
+<H2>AtomRace algorithm</H2>
+<P>Race Detection &amp; Healing tool can use a new algorithm AtomRace for detecting
+atomicity violations. This algorithm can be used for detecting both
+data races (detected as a special kind of atomicity violation) and
+violation of predefined atomicities (block of code that should be
+executed without unwanted inference). 
+</P>
+<P>Data race detection is based on straightforward application of
+data race detection. Each instruction accessing a shared data is
+enclosed by pseudo instructions beforeAccess and afterAccess which
+delimits a <I>primitive atomic section</I> span just only one
+instruction – the one which access a shared variable. AtomRace
+algorithm then checks if two primitive atomic sections defined around
+accesses to the same shared variable does not overlap. Overlapping of
+such sections implies that accesses are being simultaneous and data
+race is possible. Of course, a chance on detecting such situation is
+sometimes very low. Therefore this approach can be combined with
+noise injection technique which injects noise within primitive atomic
+sections and so makes them longer what increases the probability of
+detecting data race.</P>
+<P>Of course <I>atomic sections</I> can be constructed to span more
+than only one instruction. In such a case, atomic section starts at
+beforeAccess to a shared variable and has several ending points. At
+least one of ending points is afterAccess to the same shared
+variable. Atomic section in this case span two or more accesses to
+the shared variable. Other ending points cover situations when an
+execution takes different execution path which does not contain
+afterAccess operation. When an overlapping of such atomic section and
+any other atomic section which can not be serialized is detected,
+warning concerning atomicity violation is produced. Again, the noise
+injection technique can be used to increase the probability of
+hitting the problem.</P>
+<TABLE WIDTH=700 BORDER=1 CELLPADDING=2 CELLSPACING=3>
+	<COL WIDTH="25%">
+	<COL WIDTH="25%">
+	<COL WIDTH="50%">
+	<TR>
+		<TH>
+			<P>Thread executing atomicity</P>
+		</TH>
+		<TH>
+			<P>Other thread</P>
+		</TH>
+		<TH>
+			<P>Problem description</P>
+		</TH>
+	</TR>
+	<TR>
+		<TD>
+			<P>read - write</P>
+		</TD>
+		<TD>
+			<P>write</P>
+		</TD>
+		<TD>
+			<P>The second write relies on a value from the preceding read that
+			is overriden by other thread.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<P>read - read</P>
+		</TD>
+		<TD>
+			<P>write</P>
+		</TD>
+		<TD>
+			<P>The write by other thread makes the two reads have different
+			views of the variable.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<P>write - write</P>
+		</TD>
+		<TD>
+			<P>read</P>
+		</TD>
+		<TD>
+			<P>Intermediate result that is assumed to be invisible to other
+			threads is read by a remote access.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<P>write - read</P>
+		</TD>
+		<TD>
+			<P>write</P>
+		</TD>
+		<TD>
+			<P>The read does not receive the local result it expects.</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><B>All these scenarios are unserializable</B> (more can be
+read for example in the article of AVIO tool). If some of this
+scenarios is detected the atomicity violation warning is produced. 
+</P>
+
+<H2>Healing of detected violations</H2>
+<P>The basic idea of healing is that Race Detection &amp; Healing tool tries to force the
+predefined correct atomicity. If there is a race or atomicity
+violation over a variable and if there is predefined atomicity
+present, the Race Detection &amp; Healing tool use selected method to minimize the
+probability of context switch in the middle of the problematic
+atomicity section. Several methods has been implemented and are
+briefly described later in this text. 
+</P>
+<P>Several methods for forcing predefined correct atomicity have been
+designed and implemented. Most of the methods below are not able to
+heal detected problem totally but they can decrease the probability
+of its manifestation. The only exception is the NEWMUTEX method which
+can really force the predefined correct atomicity. But because there
+are no checks if the locking is legal yet, this method can cause
+deadlock. Available methods for healing: 
+</P>
+<UL>
+	<LI>THREADS - Method based on the
+	utilization of other processors (cores) in the system. Several
+	working threads which with high priority utilizes all available
+	cores but one are trying to force multi-core system to behave as
+	uni-core system.
+	<LI>YELD - Method tries to influence
+	scheduler by calling <I>yield</I> before thread enters the atomic
+	section which should be executed atomically. Therefore, the thread
+	receives a new full window from scheduler – the probability of
+	interleaving on uni-core system is lower. 
+	<LI>PRIORITY - Method that influences
+	scheduler by increasing priority of the thread entering atomic
+	section to maximum and returns it back when the thread leaves the
+	section. 
+	<LI>YELDPRIORITY - Method that
+	influences scheduler by the increasing the priority of the thread
+	entering critical section to maximum and calls <I>yield</I> to
+	receive full window from scheduler. Simply combination of previous
+	two methods.
+	<LI>YIELDTHREADS - Method based on the
+	utilization of other processors (cores) in the system. It starts
+	threads and call <I>yield</I> in the current thread to let working
+	threads to start. 
+	
+	<LI>NEWMUTEX - Method which uses a new
+	explicit lock to guard the variable during the whole atomic section.
+		
+	<LI>OTYIELD - Method that uses <I>yield</I>
+	called on the threads trying to access the variable while another
+	thread is inside an atomic section. 
+	
+	<LI>OTWAIT - Method that uses <I>wait</I>
+	called on the threads trying to access the variable while another
+	thread is inside an atomic section. 
+	
+	<LI><P>OTSTRONGYIELD - Method that uses bussy loop to repeatedly
+	call <I>yield</I> till there is no thread within any problematic
+	atomic section.
+</UL>
+
+@see cz.vutbr.fit.healing.Healing
+@see cz.vutbr.fit.racedetector.EraserDetect
+@see cz.vutbr.fit.racedetector.AtomRaceDetect
+
+
+@author Zdenek Letko, xletko00@stud.fit.vutbr.cz
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listeners>
+<extension class="cz.vutbr.fit.racedetector.AtomRace" deferrable="false" typeCount="10" />
+<extension class="cz.vutbr.fit.racedetector.Eraser" deferrable="false" typeCount="13"/>
+</listeners>

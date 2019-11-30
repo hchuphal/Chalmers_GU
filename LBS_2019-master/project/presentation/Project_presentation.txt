@@ -1,0 +1,23 @@
+Project presentation
+Watch out for the presentation and opposition schedule on the main page. The opponents are expected to ask at least two questions. A rough structure of your talk should be as follows:
+Title
+Include the names of everyone in the project group.
+The goal of the project
+Describe the goal of the project. Include the necessary background.
+What you have done
+Give a brief overview and focus on some interesting concrete parts. Emphasize your own ideas.
+Evaluation
+Did you achieve the goal? Describe your results. Finish by crucial insights (coming out of your project) you want to share with the others.
+Project report
+A project report needs to be submitted by deadline. The project report should be well-structured. Below is a template that you might want to use. Note that different projects might benefit from different structures.
+Title
+Background
+Goal
+Description of work
+If this is an implementation project, describe the conceptual part and code documentation part separately. In the code documentation part, describe the structure of the code and what each of the submitted files contains. If appropriate, include the results of test runs. Also, include instructions on how your programs should be tested.
+Results
+Appendix: Detail the contribution of each person in the group.
+Be careful to fulfill the requirements of what needs to be provided (see the descriptions above). Name the documentation file report.txt or report.pdf (the report should be either in ASCII or PDF), make sure to include your FIRE group number on the title page, and submit it together with the rest of the files necessary for grading the project (and testing your programs).
+There is no requirement on the number of pages. Typically, projects that are heavy on implementation use less pages for reports than projects heavy on conceptual studies. On average, reports tend to be around 20 pages long, but the deviation depends on the subject.
+Project report draft
+Report drafts need to be supplied to the "opponents" by the respective deadline. The draft does not have to be polished, it should be intelligible and sufficiently clear for the opponents to assess the main contributions.

@@ -1,0 +1,23 @@
+
+public class SimpleRace {
+ 
+	  static int sharedVar; 
+	  private static Object lock = new Object();
+ 
+    public static void main(String[] args) {
+        new ThreadRunner() {
+            @Override
+            public void thread1() {
+            	
+            	synchronized(lock) {
+                sharedVar++;}
+            }
+ 
+            @Override
+            public void thread2() {
+            	synchronized(lock) {
+                sharedVar++; }
+            }
+        };
+    }
+}

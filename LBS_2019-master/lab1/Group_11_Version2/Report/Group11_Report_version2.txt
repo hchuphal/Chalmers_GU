@@ -1,0 +1,264 @@
+TDA602 / DIT101AssignmentsLab 1 - TOCTOU
+Fire Group-11 , Assignemnt 1, Resubmission
+	1. Himanshu Chuphal ( guschuhi@student.gus.se)
+	2. Raya Altarabulsi ( rayyatar@gmail.com )
+
+______________________________________________________________________________________________________________
+Corrections done on top of version 1:
+1. Multiple threads removed from main and instead used 2 instances of the same program in two different terminals and ran the programs in parallel.
+2. file locks maintined in safeWithdraw throwing exception and locks released properly.
+3. setBalance made private.
+4. Executable bins removed and Makefile included to build and clean bins
+5. Scripts to run in parallel in 2 opened terminals included.
+______________________________________________________________________________________________________________
+Deliverables:
+To make sure the solution (0, 1 and 2) works outside our Eclipse IDE, we have generated jar 
+for each part of the solution names as solution0.jar, and Makefile inclduing terminal_1.sh and terminal_2.sh for part 1 and part 2.
+
+Sources files tree( both frontEnd and backEnd code for each solution )::
+.
+├── Report
+│   └── Group11_Report_version2.txt
+├── bins
+│   ├── pocket.txt
+│   ├── solution0.jar
+│   ├── solution0.sh
+│   └── wallet.txt
+└── src
+    ├── solution0
+    │   ├── backEnd
+    │   │   ├── Pocket.class
+    │   │   ├── Store.class
+    │   │   └── Wallet.class
+    │   ├── fontEnd
+    │   │   └── ShoppingCart.class
+    │   ├── pocket.txt
+    │   └── wallet.txt
+    ├── solution1_ver2
+    │   ├── Makefile
+    │   ├── bins
+    │   ├── src
+    │   │   ├── ShoppingCart.java
+    │   │   └── backEnd
+    │   │       ├── Pocket.java
+    │   │       ├── Store.java
+    │   │       ├── Wallet.java
+    │   │       ├── pocket.txt
+    │   │       └── wallet.txt
+    │   ├── terminal_1.sh
+    │   └── terminal_2.sh
+    └── solution2_ver2
+        ├── Makefile
+        ├── bins
+        ├── src
+        │   ├── ShoppingCart.java
+        │   └── backEnd
+        │       ├── Pocket.java
+        │       ├── Store.java
+        │       ├── Wallet.java
+        │       ├── pocket.txt
+        │       └── wallet.txt
+        ├── terminal_1.sh
+        └── terminal_2.sh
+
+14 directories, 29 files
+
+Execution steps for part 1 and 2:
+1. Build all bins:
+    make clean
+    make all
+2. Open 2 terminals and do to the dir of solution2_ver1.
+3. Run ./terminal_1.sh in the 1st terminal terminal
+4. After running step 3, immediately run Run ./terminal_2.sh in the 2nd terminal 2nd terminal.
+
+Likewise do the same steps for running Part 2 of the solutions (same scripts are used for execution). 
+The only difference is solution1_ver2 exposes the attacks and solution2_ver2 solves the attack.
+
+______________________________________________________________________________________________________________
+
+1. Part0 Solution  (same as before)
+cat solution0.sh
+#!/bin/bash
+echo "Running Solution of part 0 of Assignemnt 1"
+java -jar "solution0.jar"
+
+// Output Used Eclipse IDE to develop and generate jar file
+./solution0.sh
+
+Your balance: 30000
+car	30000
+book	100
+pen	40
+candies	1
+What would you like to to buy?: book
+Your new balance is: 29900
+
+cat pocket.txt
+book
+book
+
+cat wallet.txt:
+29900
+
+______________________________________________________________________________________________________________
+
+1. Part1 Solution 
+Bug :: The ShoppingCart has a shared resource (wallet.txt), and the backend does not prevent multiple instances of the same program from accessing wallet.txt at the same time, 
+thereby leading to a race condition. In such cases without any prevention would cause the instance of the program which finishes last write the final result to the shared file(wallet.txt).
+So, every user accesses the same wallet and the same pocket, and there is no mutual exclusion implemented in this program. 
+There are some critical sections in the ShoppingCart that needs some kind of protection to ensure mutual exclusion methods to avoid the race conditions.
+
+This interleaving of multiple threads execution at the same time of the shared variables is explained below:
+
+Execution: ./terminal_1.sh
+bash-3.2$ ./terminal_1.sh
+
+Terminal 1:: Demonstrating vulnerable attack, using 2 instances of ShoppingCart
+
+Before Shopping starts...
+cat wallet.txt
+30000
+cat pocket.txt
+book
+
+>>Buy a Car from ShoppingCart
+Your balance: 30000
+car 30000
+book    100
+pen 40
+candies 1
+What do you want to buy?: car
+Your new balance is: 0
+
+cat pocket.txt
+book
+car
+
+cat wallet.txt:
+0
+
+and ./terminal_2.sh
+
+bash-3.2$ ./terminal_2.sh
+
+Terminal 2:: Demonstrating vulnerable attack, from attacks using 2 instances of ShoppingCart in the 2nd terminal
+
+Before Shopping starts...
+cat wallet.txt
+30000
+cat pocket.txt
+book
+
+>>Now, buy a pen from ShoppingCart
+Your balance: 30000
+car 30000
+book    100
+pen 40
+candies 1
+What do you want to buy?: pen
+Your new balance is: 29960
+
+cat pocket.txt
+book
+car
+pen
+
+cat wallet.txt:
+29960
+
+Program under vulnerable attack, buying a car at a price of a pen!!
+
+As terminal_2.sh was ran in parallel to terminal_1.sh where we are trying to buy a car but as terminal_2.sh finished last buying pen
+and as there is no prevention on the shared resources, finishes last and wrote the final result to the shared file(wallet.txt and pocket.txt).
+______________________________________________________________________________________________________________
+
+3.  Part2 Solution 
+Implementation : SafeWithdraw
+ 
+public void SafeWithdraw(int amtWithdraw) throws Exception {
+          FileLock l3 = file.getChannel().lock();
+          int balance = readBalance();
+          if (balance - amtWithdraw < 0) 
+          {
+              // version_2
+              throw new Exception("\nSafeWithdrawal: sorry, insufficient funds in the wallet!!");
+          }
+          writeBalance(balance - amtWithdraw);
+          l3.release(); // release the lock
+}
+
+    public int getBalance() throws IOException {
+        FileLock l1 = file.getChannel().lock();
+        int balance = readBalance();
+        l1.release(); // release the lock
+        return balance;
+    }
+
+    private void setBalance(int newBalance) throws Exception {
+         FileLock l2 = file.getChannel().lock();
+         writeBalance(newBalance);
+         l2.release();  // release the lock
+    }
+
+
+Execution :    Same terminal_1.sh and terminal_2.sh were ran as explained in  part 1 of the solution but with modified protection of files.
+
+bash-3.2$ ./terminal_1.sh
+
+Terminal 1:: Demonstrating vulnerable attack, using 2 instances of ShoppingCart
+
+Before Shopping starts...
+cat wallet.txt
+30000
+cat pocket.txt
+book
+
+>>Buy a Car from ShoppingCart
+Your balance: 30000
+car 30000
+book    100
+pen 40
+candies 1
+What do you want to buy?: car
+Your new balance is: 0
+
+cat pocket.txt
+book
+car
+
+cat wallet.txt:
+0
+
+and
+bash-3.2$ ./terminal_2.sh
+
+Terminal 2:: Demonstrating vulnerable attack, from attacks using 2 instances of ShoppingCart in the 2nd terminal
+
+Before Shopping starts...
+cat wallet.txt
+0
+cat pocket.txt
+book
+car
+
+>>Now, buy a pen from ShoppingCart
+Your balance: 0
+car 30000
+book    100
+pen 40
+candies 1
+What do you want to buy?: pen
+SafeWithdrawal: sorry, insufficient funds in the wallet!! Exit!
+
+SafeWithdrawal works as expected, Safe to Shop!!
+
+
+Explanation :
+The bug explained in part1, it is solved by by locking a shared file( wallet.txt ) to prevent it from being used by multiple instances of the ShoppingCart at the same time
+using FileLock. Here, FileLock is preventing 2 instances of the same object from accessing the shared resource ( wallet.txt) at the same time thereby preventing the race conditions against different instances. 
+
+
+
+
+
+

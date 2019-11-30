@@ -1,0 +1,45 @@
+/* Copyright (c) 2016,2017,2018 Runtime Verification, Inc.
+ * All rights reserved.
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <unistd.h>
+#define USEMUTEX
+
+#define NUM_THREADS 4
+
+long accum = 0;
+static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+
+
+static void *square(void *param) {
+    int x = *(int *)param;
+#ifdef USEMUTEX
+    pthread_mutex_lock(&mutex);
+#endif
+    accum += x * x;
+#ifdef USEMUTEX
+    pthread_mutex_unlock(&mutex);
+#endif
+    return NULL;
+}
+
+int main() {
+    pthread_t threads[NUM_THREADS];
+    int *params[NUM_THREADS];
+
+    for (long t = 0; t < NUM_THREADS; t++) {
+        params[t] = malloc(sizeof(int));
+        *params[t] = t + 1;
+        pthread_create(&threads[t], NULL, square, (void *)params[t]);
+    }
+
+    for (long t = 0; t < NUM_THREADS; t++) {
+        pthread_join(threads[t], NULL);
+        free(params[t]);
+    }
+
+    printf("%ld\n", accum);
+    return accum & 0377U;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	FindBugs plugin descriptor for demo plugin
+
+	Written by David Hovemeyer	
+	This code is in the public domain
+-->
+
+<FindbugsPlugin
+		pluginid="cz.vutbr.fit.findbugs.atom"
+		defaultenabled="true"
+		provider="ZL FIT VUTBR" 
+		website="http://www.fit.vutbr.cz">
+
+	<!-- Detector ordering constraints -->
+	<OrderingConstraints>
+	</OrderingConstraints>
+	
+	<!-- Detectors -->
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindAtomicity"
+    		speed="fast"
+    		reports="ZL_TEST"
+	/>
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindPatterns"
+    		speed="fast"
+    		reports="ZL_TEST"
+	/>
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindOmit"
+    		speed="fast"
+    		reports="ZL_TEST"
+	/>
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindProgLocation"
+    		speed="fast"
+    		reports="ZL_TEST"
+	/>
+
+	<!-- Analysis engine registrar -->
+	<EngineRegistrar class="cz.vutbr.fit.findbugs.atom.analysis.EngineRegistrar"/>
+
+	<!-- Bug patterns -->
+	<BugPattern abbrev="ZL" type="ZL_TEST" category="CONTEST" />
+
+</FindbugsPlugin>
+    
+

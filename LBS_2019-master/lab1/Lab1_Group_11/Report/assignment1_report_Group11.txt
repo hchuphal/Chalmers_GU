@@ -1,0 +1,203 @@
+TDA602 / DIT101AssignmentsLab 1 - TOCTOU
+Fire Group-11 , Assignemnt 1
+	1. Himanshu Chuphal ( guschuhi@student.gus.se)
+	2. Raya Altarabulsi ( rayyatar@gmail.com )
+
+
+______________________________________________________________________________________________________________
+
+Deliverables:
+To make sure the solution (0, 1 and 2) works outside our Eclipse IDE, we have generated jar 
+for each part of the solution names as solution0.jar, solution1.jar and solution2.jar ( in bins folders)
+The source code for each are also shared separately ( Assignment1/src). The base for solution1 was solution0 and 
+likewise for solution2, solution1 was taken as base.
+
+Sources files ( both frontEnd and backEnd code for each solution )
+1. Assignment1
+	- src
+		- solution0
+		- solution1
+		- solution2
+2. bins 
+	To run each part of the solutions, just run the sh file calling respective jar files internally :
+	- Part 0- ./solution0.sh
+	- Part 1- ./solution1.sh
+	- Part 2- ./solution2.sh
+______________________________________________________________________________________________________________
+
+1. Part0 Solution 
+cat solution0.sh
+#!/bin/bash
+echo "Running Solution of part 0 of Assignemnt 1"
+java -jar "solution0.jar"
+
+// Output Used Eclipse IDE to develop and generate jar file
+./solution0.sh
+
+Your balance: 30000
+car	30000
+book	100
+pen	40
+candies	1
+What would you like to to buy?: book
+Your new balance is: 29900
+
+cat pocket.txt
+book
+book
+
+cat wallet.txt:
+29900
+
+______________________________________________________________________________________________________________
+
+1. Part1 Solution 
+Bug :: The ShoppingCart has a shared resource (wallet.txt), and the backend does not prevent multiple threads from accessing wallet.txt at the same time, 
+thereby leading to a race condition.In such cases without any prevention would cause the thread which finishes last write the final result to the shared file(wallet.txt).
+So, every user accesses the same wallet and the same pocket, and there is no mutual exclusion implemented in this program. 
+There are some critical sections in the ShoppingCart that needs some kind of protection to ensure mutual exclusion methods to avoid the race conditions.
+
+This interleaving of multiple threads execution at the same time of the shared variables is explained below:
+
+cat solution1.sh
+#!/bin/bash
+echo "Running Solution of part 1 of Assignemnt 1"
+java -jar "solution1.jar"
+
+// Output Used Eclipse IDE to develope and generate jar file
+./solution1.sh
+
+ProductShopCart_1
+Your balance: 30000
+car	30000
+book	100
+pen	40
+candies	1
+What would you like to to buy?: car
+ProductShopCart_2
+Your balance: 30000
+car	30000
+book	100
+pen	40
+candies	1
+What would you like to to buy?: pen
+Your new balance is: 0
+
+cat pocket.txt
+book
+car
+
+cat wallet.txt:
+0
+Your new balance is: 29960
+
+cat pocket.txt
+book
+car
+pen
+
+cat wallet.txt:
+29960
+
+Interleaving Explanation:
+In thisinterleaving example, the user could by a car for the price of the book!!
+Shared variables-- wallet.txt and pocket.txt
+Threads - 2 ( lets sat T1 and T2)
+Threads Sequence would look like this:
+
+1. T1 local variable wallet = 30000
+2. T2 local variable wallet = 30000
+3. T1 buys the car (ProductShopCart_1, car)
+4. T1 updates wallet balance ( using its local variable)
+5. T1 updates pocket with car
+
+Now, T2
+T1 buys the car (ProductShopCart_2, book)
+6. T2 updates wallet balance ( using its local variable)
+7. T2 updates pocket with book
+
+Final Output::
+cat pocket.txt
+book
+car
+pen
+
+cat wallet.txt:
+29960
+
+______________________________________________________________________________________________________________
+
+
+3.  Part2 Solution 
+Implementation :
+ /**
+     * Safe withdraw methods with locks on the shared resource
+     *
+     * @param  valueToWithdraw        amount value to withdraw
+     */
+    public void safeWithdraw(int valueToWithdraw) throws Exception {
+        System.out.println("\nSafeWithdraw Execution.....");
+        int curBal, walletBalance;
+        FileLock fl3 = file.getChannel().lock();  // acquire the lock
+        this.file.seek(0);
+        curBal = Integer.parseInt(this.file.readLine());
+        if (curBal < valueToWithdraw) {
+            //throw new Exception("Not Sufficient funds in the wallet!");
+            System.out.println("Not enough credits in the wallet, Exiting....");
+            System.exit(1);
+        }  
+        walletBalance = curBal - valueToWithdraw;
+        this.file.setLength(0);
+        String str = new Integer(walletBalance).toString()+'\n'; 
+        this.file.writeBytes(str);
+        fl3.release(); // Finally releasing the lock 
+    }
+
+
+Execution :    
+cat solution2.sh
+#!/bin/bash
+echo "Running Solution of part 2 of Assignemnt 1"
+java -jar "solution2.jar"
+
+//Output ./solution2.sh
+Your balance: 30000
+car 30000
+book    100
+pen 40
+candies 1
+What would you like to to buy?: car
+Your balance: 30000
+car 30000
+book    100
+pen 40
+candies 1
+What would you like to to buy?: pen
+
+SafeWithdraw Execution.....
+Your new balance is: 0
+
+cat pocket.txt
+book
+car
+
+cat wallet.txt:
+0
+
+SafeWithdraw Execution.....
+Not enough credits in the wallet, Exiting....
+
+Explanation :
+The bug explained in part1, it can be solved by by locking a shared file( wallet.txt ) to prevent it from being used by multiple threads of the ShoppingCart at the same time
+using FileLock. Here, FileLock is preventing 2 instances of the same object from accessing the shared resource ( wallet.txt) at the same time thereby preventing the race conditions against different instances. 
+Other solutions are possible for e.g like use lock or a binary semaphore and monitor common in the field of concurent programming to avoid race conditions. 
+Thus problem mentioned in part1 is solved.
+
+Were there other APIs suffering from possible races? If so, please explain them and update the APIs to eliminate any race problems.
+In the other shared vaiable txt file (pocket.txt), we can possibly pay for two items but only one can be written in the other shared file pocket.txt at the end. 
+As explained in solution2 avove, to be able to fix this issue, we could a lock in a the same way as with safeWithdraw(), thereby only letting one execution access and 
+write to pocket.txt at a time as an intented solution.
+
+
+
+

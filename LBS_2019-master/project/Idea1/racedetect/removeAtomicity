@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CP="lib/racedetector.jar:lib/javolution.jar"
+
+echo "Removing broken atomicities  ---------------------------"
+java -cp $CP cz.vutbr.fit.atomicity.RemoveAtomicity #$1 $2
+echo "Done ---------------------------------------------------"
+
+

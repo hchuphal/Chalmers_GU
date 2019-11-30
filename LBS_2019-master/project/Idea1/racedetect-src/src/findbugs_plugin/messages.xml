@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MessageCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:noNamespaceSchemaLocation="messagecollection.xsd">
+                  
+	<Plugin>
+	    <ShortDescription>ZL Test</ShortDescription>
+	    <Details>
+			<![CDATA[
+			<p>
+			This plugin contains FindBugs detectors for SHADOWS. (ZL Test)
+			</p>
+			]]>
+	    </Details>
+	</Plugin>                  
+	
+	<!-- Detectors -->
+
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindAtomicity">
+    	<Details>
+			<![CDATA[
+			<p>Just test...</p>
+			]]>
+    	</Details>
+	</Detector>
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindPatterns">
+    	<Details>
+			<![CDATA[
+			<p>Just test...</p>
+			]]>
+    	</Details>
+	</Detector>
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindOmit">
+    	<Details>
+			<![CDATA[
+			<p>Just test...</p>
+			]]>
+    	</Details>
+	</Detector>
+    <Detector class="cz.vutbr.fit.findbugs.atom.detect.FindProgLocation">
+    	<Details>
+			<![CDATA[
+			<p>Just test...</p>
+			]]>
+    	</Details>
+	</Detector>
+
+	<!-- BugPattern -->
+	                
+	<BugPattern type="ZL_TEST">
+	    <ShortDescription>ZL test</ShortDescription>
+	    <LongDescription>ZL test - should work</LongDescription>
+	    <Details>
+			<![CDATA[
+			<p> nothing</p>
+			]]>
+	    </Details>
+	</BugPattern>
+	
+	<!-- BugCode -->	
+	<BugCode abbrev="ZL">ZL Test bugs</BugCode>
+
+</MessageCollection>

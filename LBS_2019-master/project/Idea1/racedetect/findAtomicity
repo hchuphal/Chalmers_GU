@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+CP=".:lib/cfparse.jar:lib/ConTest.jar:lib/racedetector.jar:lib/javolution.jar:findbugs/lib/findbugs.jar"
+
+echo "Compiling ----------------------------------------------"
+javac -classpath $CP test/*.java
+
+echo "Instrumenting ------------------------------------------"
+java -classpath $CP com.ibm.contest.instrumentation.Instrument test/*.class 
+
+echo "Running FindBugs - searching for atomicities -----------"
+java -classpath $CP -Dfindbugs.home=findbugs -Xmx768m edu.umd.cs.findbugs.FindBugs2 -visitors FindAtomicity test/*.class
+
+echo "Done ---------------------------------------------------"
+

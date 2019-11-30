@@ -1,0 +1,36 @@
+{
+  "name": "jsflow",
+  "description": "Information Flow monitor for JavaScript in JavaScript",
+  "version": "1.1.0",
+  "private": true,
+  "dependencies": {
+     "esprima" : "^2.7.x",
+     "escodegen" : "^1.8.x",
+     "estraverse" : "^4.1.x",
+     "source-map" : "^0.1.43",
+     "underscore" : "^1.8.0"
+     },
+  "directories": {
+    "test": "tests"
+  },
+  "preferGlobal": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "LICENSE",
+    "jsflow",
+    "README.md",
+    "src/",
+    "lib/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:chalmerslbs/jsflow.git"
+  },
+  "bin": {
+    "jsflow": "src/jsflow.js"
+  },
+  "author": "Daniel Hedin, Luciano Bello, Arnar Birgisson, Alexander Sjösten, and Andrei Sabelfeld",
+  "license": "Mozilla Public License Version 2.0"
+}

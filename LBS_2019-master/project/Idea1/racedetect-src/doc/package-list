@@ -1,0 +1,5 @@
+cz.vutbr.fit.atomicity
+cz.vutbr.fit.findbugs.atom.analysis
+cz.vutbr.fit.findbugs.atom.detect
+cz.vutbr.fit.healing
+cz.vutbr.fit.racedetector

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+CP=".:lib/cfparse.jar:lib/ConTest.jar:lib/racedetector.jar:lib/javolution.jar"
+
+echo "Compiling ----------------------------------------------"
+javac -classpath $CP test/*.java
+
+echo "Instrumenting ------------------------------------------"
+java -classpath $CP com.ibm.contest.instrumentation.Instrument test/*.class 
+
+echo "Running ------------------------------------------------"
+java -classpath $CP test.Airlines 10 100 50
+
+echo "Done ---------------------------------------------------"
+

@@ -1,0 +1,142 @@
+#RACEDETECTOR PROPERTIES
+#========================
+
+#Set the directory used by RaceDetector to store its output file racedetect.txt.
+#Given directory must be written with the last slash or backslash.
+# linux example: /tmp/
+# windows example: C:/Temp/ 
+# default: (nothing) 
+rdOutputDirectory = 
+
+
+# === VARIABLE SETS 
+
+#Enable the usage of a list of variables that should not be analysed. 
+#The intention is to specify variables which produced false alarms in the
+#previous executions. The alarms for this variables are not produced any
+#more. It expects the presence of "omitvariables" text file in the input
+#directory of RaceDetector.
+# default: false
+rdOmitVariables = false
+
+#Enable the usage of a list of variables that should be healed from the
+#beginning. All the instances of variables with names given in a file will be
+#healed as the race has been already detected on them. In this case, the
+#healing process can be tested. It expects the presence of "healvariables" 
+#text file in the input directory of RaceDetector.
+# default: false
+rdHealVariables = false
+
+
+# === RACE DETECTING ALGORITHM
+
+# --- Eraser setting
+  #It is common that initialization and use of objects are logically
+  #separated. In such cases second owner should not be burnered with access
+  #checks. To allow this feuture set this to true.
+  # default: true
+  rdOwnerTransfer = true
+
+  #Turn on the lock suggestion mechanism. 
+  # default: true
+  rdLockDetermine = true
+
+# --- AtomRace setting
+
+  # --- AtomRace
+
+  #AtomRace has two phases:
+  #1) Making atomicity set more accurate by removing atomicities that
+  #are not true (means that can be violated in a normal execution
+  #of the program). This phase is called learning.
+  #2) When the atomicity set is accurate enough it can be used for
+  #detecting atomicity violation and healing.
+  #Algorithm works in the first phase if true is selected here. Otherwise
+  #it works in detection phase. 
+  # default: true
+  rdAtomRaceLearn = true
+  
+  #Turn on the immediate healing mechanism. It starts to heal the
+  #variable suspected from atomicity violation before it proves if 
+  #it is false alarm or not. In some very special cases this can lead
+  #to deadlock.
+  # default: false
+  rdAtomImmediateHealing = false
+
+  # --- AtomRace Noise Injection
+
+  #Enable the usage of noise injected by the race detector at randomly chosen
+  #locations. The difference from ConTest driven noise injection is that race 
+  #detector driven noise is injected at locations which helps AtomRace to 
+  #increase the probability of spotting a violation. The rdNoiseFrequency option 
+  #has to be set to a positive value.
+  # default: false
+  rdNoiseRandom = false
+
+  #Enable the usage of a list of variables that should be focused by noise
+  #injecting mechanism. In such case, a noise will be inserted in the middle
+  #of sections that should be atomic with the intention to increase the
+  #probability of race manifestation. It expects the presence of "noisevariables"
+  #text file in the input directory of RaceDetector. The rdNoiseFrequency option 
+  #has to be set to a positive value.
+  # default: false
+  rdNoiseVariables = false
+
+  #Enables the usage of a list of program locations that will be 
+  #focused by noise injecting mechanism. In such case, a noise is 
+  #inserted around the given program location with the intention 
+  #to increase the probability of race manifestation. It expects 
+  #the presence of "noiselocations" text file in the input directory.
+  #The rdNoiseFrequency option has to be set to a positive value.
+  # default: false
+  rdNoiseProgLoc = false
+
+  #Determine frequency of noise injection into the execution in the case
+  #that rdNoiseVariables is enabled. Then for every specified variable a
+  #noise is produced with the intentio. The frequency should be 
+  #between 0 and 1000.
+  #The ConTest noise strength, noise type and halt-one-thread parameters
+  #apply also for this kind of noise. To disable ConTest noise injection
+  #and enable only RaceDetector noise injection, set ConTest noise frequency
+  #to 0 and RaceDetector noise frequency to positive number between 0 and 1000.
+  # default: 0
+  rdNoiseFrequency = 0
+
+# === HEALING  (Direcotry with atomicity must be present)
+#Turn on the healing. It also turns on atomicity detection because
+#it is needed for gathering informations for healing process. 
+# default: false
+rdHealing = false
+
+#Specify the healing method. There are following possibilities:
+#
+#  YIELD: This method is based on the idea that if the thread
+#release the CPU (by calling yield), next time when is scheduled gets full CPU
+#time window and therefore can make following atomic section at once.
+#  PRIORITY: This method increase the priority of the thread and so
+#decrease the probability of interuption.
+#  YIELDPRIORITY: The combination of previous two.
+#  NEWMUTEX: This method protects the problematic variable by a new explicit
+#lock. This lock is taken every time the variable is accessed and is released
+#after access. If there is section that should be executed atomicaly the lock is
+#not released in between. This approach can heal the race.
+#  SEMAPHORE: This method protects the problematic variable by a new explicit
+#lock implemented using a Semaphore class. Functionality is the same as with
+#a new explicit lock. The difference is that semaphore can be released by
+#another thread than the thread which acquired a permit. This way, the deadlock
+#healing mechanism can release a semaphore if needed. 
+#  OTYIELD: This method force every thread trying to access the problematic variable
+#to release the CPU, if another thread is inside the section which should be
+#executed atomicaly.
+#  OTWAIT: This method force every thread trying to access the problematic variable
+#to wait for a while, if another thread is inside the section which should be
+#executed atomicaly.
+#  THREADS: This method works as YIELD method + it runs a NUM_CPU-1 working dummy 
+#threads to utilize CPU.
+#  YIELDTHREADS: This method works as YIELD method + it runs a NUM_CPU-1 working dummy 
+#threads to utilize CPU.
+
+# default: newmutex
+rdHealingMethod = newmutex
+
+

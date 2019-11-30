@@ -1,0 +1,63 @@
+Project more open-ended; examples:
+– common attacks types and protection
+• injection attacks
+• OWASP Top 10
+– FindBugs, Valgrind, OWASP tools,…
+– Android app security
+– building applications with a security-typed language
+
+Project ideas
+• Information flow trackers
+• Security evaluation
+– Popular software/service (but not too popular :)
+• Mobile computing
+– Android app security
+• Web application security
+– Secure ads
+– Secure mashups
+– OWASP Top 10
+• Location privacy in apps
+• More ideas on the course web page…
+
+
+Project ideas
+The intention is that projects are open-ended. Below are some alternatives for inspirations, but don't feel constrained by these suggestions.
+Tools for race detection
+Experiment with tools for race detection in threaded programs. For example, Java Race Detector and Healer appears to be an interesting candidate. Discuss the types of races caught and not caught by the tool, compare the different tools on false positives and negatives, and experiment with the tools on benchmarks implementing different application scenarios.
+Language-based security for mobile computing
+This may be an investigation of secrecy protection, integrity guarantees or obfuscation techniques used in mobile phones. You might want to focus on concrete topics as Android app security.
+Location privacy
+Location-based services are becoming increasingly popular, thanks to the ubiquity and mobility of smartphones. But these services raise privacy concerns. Studying how location information can flow to other users and services is an interesting direction for a project.
+Web language security
+Study in depth the security aspects of languages like JavaScript an frameworks like Django.
+Constructing secure mashups
+Identify interesting scenarios and implement the scenarios with the emphasis on mashup security. Based on the experiments, discuss programming patterns and discuss possibilities and limitations for building secure mashups.
+Practical information flow control
+Information flow control allows tracking propagation of information in programs. Many exciting projects are possible here: for example, around the JSFlow (Links to an external site.)Links to an external site. tool for JavaScript, around
+secure multi-execution (Links to an external site.)Links to an external site., which you can implement for favorite language, or doing a ﬁCase study in a security-typed language like Jif, Paragon, or Fabric, similar to this (Links to an external site.)Links to an external site..
+Security protocols
+Implement a demonstration of attacks on security protocols. This can be both protocol-level and implementation-level attacks. Try to make your demonstration both instructive and fun. You can adapt the style of the course's labs, demonstrating attacks on a vulernable implementation and securing it.
+Java security
+Conduct an investigation of security in the Java language. One way for this project is to follow the idea of the previous one and come up with attacks and overview protection mechanisms.
+Advanced SQL injection attacks and protection
+A rich topic that has direct relevance to language-based security. If you go for this project, make sure that this goes well beyond the kind of simple attacks in the WebAppSec lab.
+Advanced cross-site scripting (XSS) attacks and protection
+The plague of today's web, and an area where language-based security has a lot of potential. Again, if you go for this project, make sure that this goes beyond the kind of simple attacks in the WebAppSec lab.
+Language-based obfuscation techniques
+A hot area and one that is hard to get right!
+Security review
+Get hold of an open source system (such as php discussion forum or Java petshop) and scrutinize the code for vulnerabilities discussed in the course. The analysis should address both general principles of security design (see the lectures) as well as concrete issues such as races, random number generation, the use of cryptography, access control, etc. Hint: pick a fresh target (rather than an established system), to increase changes of finding interesting vulnerabilities.
+Survey
+Pick an area in language-based security and prepare a thorough survey. Recall that practical experiments will need to be a part of the survey to get a higher grade.
+Your own project
+As open-ended as you can get. Be careful in making your proposal concrete - it is easy to aim for a project that is not feasible within the course's time frame.
+Project presentation
+Watch out for the presentation and opposition schedule on the main page. The opponents are expected to ask at least two questions. A rough structure of your talk should be as follows:
+Title
+Include the names of everyone in the project group.
+The goal of the project
+Describe the goal of the project. Include the necessary background.
+What you have done
+Give a brief overview and focus on some interesting concrete parts. Emphasize your own ideas.
+Evaluation
+Did you achieve the goal? Describe your results. Finish by crucial insights (coming out of your project) you want to share with the others.
