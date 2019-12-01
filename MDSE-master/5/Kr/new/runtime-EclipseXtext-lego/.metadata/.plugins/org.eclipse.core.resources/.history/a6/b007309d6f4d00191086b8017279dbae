@@ -1,0 +1,24 @@
+BrickModel legoBricks
+{
+	contains {AbstractBrick abstractBrick {dimensions 
+		Size {
+			brickHeight 5 
+			brickWidth 10
+		}
+	},
+		 ComplexBrick complexBrick {
+		 	getSize (abstractBrick )
+		 	dimensions Size {
+		 		brickHeight 5 
+		 		brickWidth 10
+		 		
+		 	}
+		 	hasPosition {
+		 		Position{
+		 		coordinates Center}
+		 }
+		 }
+	} 
+	limits Limits{length 20 }
+	
+}

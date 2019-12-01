@@ -1,0 +1,33 @@
+ManuSys300 -> raw
+ManuSys300 -> processed
+ManuSys300 -> something
+ManuSys300 -> another
+ManuSys300 -> manuStep
+ManuSys300 -> wagon
+ManuSys300 -> qas
+ManuSys300 -> Mike
+ManuSys300 -> Wood
+ManuSys300 -> Metal
+ManuSys300 -> Stone
+
+                        manufacturingSystem.impl.ManufacturingStepImpl@69be5589 (name: manuStep) (speed: 10)
+processed -> manuStep
+                            
+processed -> Willies
+                        manufacturingSystem.impl.TransportStepImpl@743dd781 (name: wagon) (speed: 10)
+manuStep -> raw
+                            
+                        manufacturingSystem.impl.StoragePointImpl@41c78396 (name: raw)
+manuStep -> qas
+                            
+                        manufacturingSystem.impl.QualityAssuranceStepImpl@7874ec03 (name: qas) (speed: 10)
+                            
+manuStep -> Charlie
+                        manufacturingSystem.impl.StoragePointImpl@41c78396 (name: raw)
+                            
+                        manufacturingSystem.impl.StoragePointImpl@73973d0e (name: processed)
+                            
+wagon -> Simon
+                        manufacturingSystem.impl.ManufacturingStepImpl@69be5589 (name: manuStep) (speed: 10)
+                            
+qas -> Willies

@@ -1,0 +1,5 @@
+endloop 
+legoBricks -> abs
+legoBricks -> com
+legoBricks -> legoBricks
+            endsolid

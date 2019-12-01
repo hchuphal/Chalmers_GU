@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_SswVQZ_pEeC99rgH7bQD4g" name="Model">
+  <packageImport xmi:id="_SswVQp_pEeC99rgH7bQD4g">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_UVlUQJ_pEeC99rgH7bQD4g" name="Course">
+    <ownedAttribute xmi:id="_FaKBUJ_qEeC99rgH7bQD4g" name="name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_YTtWsJ_pEeC99rgH7bQD4g" name="Adress">
+    <ownedAttribute xmi:id="_Oy-K0J_qEeC99rgH7bQD4g" name="street">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_Z_HIkJ_pEeC99rgH7bQD4g" name="FullName">
+    <ownedAttribute xmi:id="_c-zz4J_pEeC99rgH7bQD4g" name="firstName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_d1ZdoJ_pEeC99rgH7bQD4g" name="lastName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_xRtsYJ_pEeC99rgH7bQD4g" name="EnrolledInSchool">
+    <ownedAttribute xmi:id="_evlYgJ_qEeC99rgH7bQD4g" name="school">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_ZOgqsJ_sEeC99rgH7bQD4g" name="course" type="_UVlUQJ_pEeC99rgH7bQD4g" association="_ZOgqs5_sEeC99rgH7bQD4g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZOgqsZ_sEeC99rgH7bQD4g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZOgqsp_sEeC99rgH7bQD4g" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_0Ub2gJ_pEeC99rgH7bQD4g" name="Person">
+    <ownedAttribute xmi:id="_f6g6kJ_qEeC99rgH7bQD4g" name="name" type="_Z_HIkJ_pEeC99rgH7bQD4g"/>
+    <ownedAttribute xmi:id="_hHnm4J_qEeC99rgH7bQD4g" name="ssn">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_l2gF8J_sEeC99rgH7bQD4g" name="adress" type="_YTtWsJ_pEeC99rgH7bQD4g" association="_l2gF85_sEeC99rgH7bQD4g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_l2gF8Z_sEeC99rgH7bQD4g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_l2gF8p_sEeC99rgH7bQD4g" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_1hm0QJ_pEeC99rgH7bQD4g" name="Employed">
+    <ownedAttribute xmi:id="_iOFfsJ_qEeC99rgH7bQD4g" name="organizationName">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_6dYxwJ_pEeC99rgH7bQD4g" name="Student">
+    <generalization xmi:id="_7wzPgJ_rEeC99rgH7bQD4g" general="_xRtsYJ_pEeC99rgH7bQD4g"/>
+    <generalization xmi:id="_9XdEQJ_rEeC99rgH7bQD4g" general="_0Ub2gJ_pEeC99rgH7bQD4g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_7YiycJ_pEeC99rgH7bQD4g" name="Employee">
+    <generalization xmi:id="__PEGIJ_rEeC99rgH7bQD4g" general="_0Ub2gJ_pEeC99rgH7bQD4g"/>
+    <generalization xmi:id="_AELwQJ_sEeC99rgH7bQD4g" general="_1hm0QJ_pEeC99rgH7bQD4g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_8ym8sJ_pEeC99rgH7bQD4g" name="PhDStudent">
+    <generalization xmi:id="_DvF7wJ_sEeC99rgH7bQD4g" general="_6dYxwJ_pEeC99rgH7bQD4g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="__O_fkJ_pEeC99rgH7bQD4g" name="Professor">
+    <generalization xmi:id="_DEPn8J_sEeC99rgH7bQD4g" general="_7YiycJ_pEeC99rgH7bQD4g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_B5c6sJ_qEeC99rgH7bQD4g" name="Car">
+    <ownedAttribute xmi:id="_rjJfsJ_sEeC99rgH7bQD4g" name="owner" type="__O_fkJ_pEeC99rgH7bQD4g" association="_rjSpoJ_sEeC99rgH7bQD4g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rjJfsZ_sEeC99rgH7bQD4g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rjJfsp_sEeC99rgH7bQD4g" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ZOgqs5_sEeC99rgH7bQD4g" name="attends" memberEnd="_ZOgqtJ_sEeC99rgH7bQD4g _ZOgqsJ_sEeC99rgH7bQD4g">
+    <ownedEnd xmi:id="_ZOgqtJ_sEeC99rgH7bQD4g" name="enrolledInSchool" type="_xRtsYJ_pEeC99rgH7bQD4g" association="_ZOgqs5_sEeC99rgH7bQD4g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZOgqtZ_sEeC99rgH7bQD4g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZOgqtp_sEeC99rgH7bQD4g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_l2gF85_sEeC99rgH7bQD4g" name="residesAt" memberEnd="_l2gF9J_sEeC99rgH7bQD4g _l2gF8J_sEeC99rgH7bQD4g">
+    <ownedEnd xmi:id="_l2gF9J_sEeC99rgH7bQD4g" name="person" type="_0Ub2gJ_pEeC99rgH7bQD4g" association="_l2gF85_sEeC99rgH7bQD4g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_l2gF9Z_sEeC99rgH7bQD4g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_l2gF9p_sEeC99rgH7bQD4g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_rjSpoJ_sEeC99rgH7bQD4g" name="car_professor_0" memberEnd="_rjSpoZ_sEeC99rgH7bQD4g _rjJfsJ_sEeC99rgH7bQD4g">
+    <ownedEnd xmi:id="_rjSpoZ_sEeC99rgH7bQD4g" name="car" type="_B5c6sJ_qEeC99rgH7bQD4g" association="_rjSpoJ_sEeC99rgH7bQD4g">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_rjSpop_sEeC99rgH7bQD4g" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_rjSpo5_sEeC99rgH7bQD4g" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

@@ -1,0 +1,257 @@
+/**
+ */
+package brickModel2.util;
+
+import brickModel2.*;
+
+import java.util.Map;
+
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.ecore.EPackage;
+
+import org.eclipse.emf.ecore.util.EObjectValidator;
+
+/**
+ * <!-- begin-user-doc -->
+ * The <b>Validator</b> for the model.
+ * <!-- end-user-doc -->
+ * @see brickModel2.BrickModel2Package
+ * @generated
+ */
+public class BrickModel2Validator extends EObjectValidator {
+	/**
+	 * The cached model package
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final BrickModel2Validator INSTANCE = new BrickModel2Validator();
+
+	/**
+	 * A constant for the {@link org.eclipse.emf.common.util.Diagnostic#getSource() source} of diagnostic {@link org.eclipse.emf.common.util.Diagnostic#getCode() codes} from this package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.emf.common.util.Diagnostic#getSource()
+	 * @see org.eclipse.emf.common.util.Diagnostic#getCode()
+	 * @generated
+	 */
+	public static final String DIAGNOSTIC_SOURCE = "brickModel2";
+
+	/**
+	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 0;
+
+	/**
+	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final int DIAGNOSTIC_CODE_COUNT = GENERATED_DIAGNOSTIC_CODE_COUNT;
+
+	/**
+	 * Creates an instance of the switch.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BrickModel2Validator() {
+		super();
+	}
+
+	/**
+	 * Returns the package of this validator switch.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EPackage getEPackage() {
+	  return BrickModel2Package.eINSTANCE;
+	}
+
+	/**
+	 * Calls <code>validateXXX</code> for the corresponding classifier of the model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		switch (classifierID) {
+			case BrickModel2Package.LIMITS:
+				return validateLimits((Limits)value, diagnostics, context);
+			case BrickModel2Package.BRICK_MODEL:
+				return validateBrickModel((BrickModel)value, diagnostics, context);
+			case BrickModel2Package.BRICK_ELEMENT:
+				return validateBrickElement((BrickElement)value, diagnostics, context);
+			case BrickModel2Package.ABSTRACT_BRICK:
+				return validateAbstractBrick((AbstractBrick)value, diagnostics, context);
+			case BrickModel2Package.COMPLEX_BRICK:
+				return validateComplexBrick((ComplexBrick)value, diagnostics, context);
+			case BrickModel2Package.POSITION:
+				return validatePosition((Position)value, diagnostics, context);
+			case BrickModel2Package.SIZE:
+				return validateSize((Size)value, diagnostics, context);
+			default:
+				return true;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateLimits(Limits limits, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(limits, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBrickModel(BrickModel brickModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (!validate_NoCircularContainment(brickModel, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validateBrickModel_limitLength(brickModel, diagnostics, context);
+		if (result || diagnostics != null) result &= validateBrickModel_limitWidth(brickModel, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * The cached validation expression for the limitLength constraint of '<em>Brick Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String BRICK_MODEL__LIMIT_LENGTH__EEXPRESSION = "\n" +
+		"\t\tself.contains ->\n" +
+		"\t\tforAll(e:BrickElement| e.dimensions.oclAsType(Size).brickHeight <= (self.limits.oclAsType(Limits).length / 2))";
+
+	/**
+	 * Validates the limitLength constraint of '<em>Brick Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBrickModel_limitLength(BrickModel brickModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(BrickModel2Package.Literals.BRICK_MODEL,
+				 brickModel,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "limitLength",
+				 BRICK_MODEL__LIMIT_LENGTH__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * The cached validation expression for the limitWidth constraint of '<em>Brick Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String BRICK_MODEL__LIMIT_WIDTH__EEXPRESSION = "self.contains ->\n" +
+		"        forAll(e:BrickElement| e.dimensions.oclAsType(Size).brickWidth <= (self.limits.oclAsType(Limits).width / 2))";
+
+	/**
+	 * Validates the limitWidth constraint of '<em>Brick Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBrickModel_limitWidth(BrickModel brickModel, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(BrickModel2Package.Literals.BRICK_MODEL,
+				 brickModel,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+				 "limitWidth",
+				 BRICK_MODEL__LIMIT_WIDTH__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateBrickElement(BrickElement brickElement, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(brickElement, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAbstractBrick(AbstractBrick abstractBrick, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(abstractBrick, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateComplexBrick(ComplexBrick complexBrick, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(complexBrick, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validatePosition(Position position, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(position, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSize(Size size, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(size, diagnostics, context);
+	}
+
+	/**
+	 * Returns the resource locator that will be used to fetch messages for this validator's diagnostics.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		// TODO
+		// Specialize this to return a resource locator for messages specific to this validator.
+		// Ensure that you remove @generated or mark it @generated NOT
+		return super.getResourceLocator();
+	}
+
+} //BrickModel2Validator

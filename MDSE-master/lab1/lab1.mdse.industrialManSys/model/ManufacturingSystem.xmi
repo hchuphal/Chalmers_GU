@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lab1.chalmers.se:ManufacturingSystem
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:lab1.chalmers.se="https://lab1.chalmers.se"
+    xsi:schemaLocation="https://lab1.chalmers.se IndustrialManSys.ecore">
+  <manufacturingsteps>
+    <transportsteps/>
+    <transportsteps/>
+    <qualityassurance/>
+    <manufacturingSeps/>
+    <inputWorkpieces/>
+    <inputWorkpieces/>
+  </manufacturingsteps>
+  <manufacturingsteps>
+    <transportsteps/>
+    <qualityassurance/>
+    <manufacturingSeps/>
+    <inputWorkpieces/>
+  </manufacturingsteps>
+  <storageFacilities/>
+  <storageFacilities/>
+</lab1.chalmers.se:ManufacturingSystem>

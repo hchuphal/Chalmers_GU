@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.chalmers.brickModel2:BrickModel
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:com.chalmers.brickModel2="com.chalmers"
+    xsi:schemaLocation="com.chalmers LegoBricks2.ecore">
+  <contains
+      xsi:type="com.chalmers.brickModel2:AbstractBrick"
+      getSize="//@contains.1"
+      name="a">
+    <dimensions/>
+  </contains>
+  <contains
+      xsi:type="com.chalmers.brickModel2:AbstractBrick"
+      name="b">
+    <dimensions
+        brickHeight="20"
+        brickWidth="10"/>
+  </contains>
+  <contains
+      xsi:type="com.chalmers.brickModel2:ComplexBrick"
+      name="c"
+      positions="//@contains.2/@hasPosition.1">
+    <dimensions
+        brickHeight="30"
+        brickWidth="15"/>
+    <hasPosition/>
+    <hasPosition
+        coordinates="Center"/>
+  </contains>
+  <limits width="100"
+      length="100"/>
+</com.chalmers.brickModel2:BrickModel>

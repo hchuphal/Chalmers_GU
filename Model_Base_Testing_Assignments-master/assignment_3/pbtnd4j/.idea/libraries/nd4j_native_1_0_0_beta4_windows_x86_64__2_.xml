@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="nd4j-native-1.0.0-beta4-windows-x86_64 (2)">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/nd4j-native-1.0.0-beta4-windows-x86_64.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

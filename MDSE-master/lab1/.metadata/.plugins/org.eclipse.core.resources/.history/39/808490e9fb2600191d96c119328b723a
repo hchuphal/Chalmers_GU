@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="IndsutrailManSys">
+  <eClassifiers xsi:type="ecore:EClass" name="ManufacturingSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manufacturingsteps" lowerBound="1"
+        upperBound="-1" eType="#//ManufacturingSteps" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startendpoint" lowerBound="1"
+        eType="#//Storage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ManufacturingSteps" eSuperTypes="#//EachStep">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="#//types"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="#//types"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualityassurance" eType="#//QualityAssurance"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transportsteps" lowerBound="1"
+        upperBound="-1" eType="#//TransportSteps" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//ManufacturingSteps" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkPieces">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="storagefacilities" lowerBound="1"
+        upperBound="-1" eType="#//Storage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enteringworkpieces" lowerBound="1"
+        upperBound="-1" eType="#//TransportSteps"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Storage"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="types">
+    <eLiterals name="wood" value="1"/>
+    <eLiterals name="metal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="NewDataType2" instanceTypeName="newDataType2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QualityAssurance" abstract="true" eSuperTypes="#//EachStep"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransportSteps" abstract="true" eSuperTypes="#//EachStep">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leavingworkpieces" upperBound="-1"
+        eType="#//WorkPieces"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EachStep" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ResponsiblePerson" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

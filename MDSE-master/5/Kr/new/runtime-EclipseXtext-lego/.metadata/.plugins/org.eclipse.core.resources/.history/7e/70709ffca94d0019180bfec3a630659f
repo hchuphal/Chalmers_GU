@@ -1,0 +1,10 @@
+Groovy Script {
+model -> (D1, 5)
+
+model -> (D2, 5)
+
+model -> (D3, 5)
+
+model -> (D4, 5)
+
+           }

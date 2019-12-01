@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/MDE_Assignment5.1/src" modelPluginID="MDE_Assignment5.1"
+    modelName="LegoBricks2" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>LegoBricks2.ecore</foreignModel>
+  <genPackages prefix="BrickModel2" disposableProviderFactory="true" ecorePackage="LegoBricks2.ecore#/">
+    <genClasses ecoreClass="LegoBricks2.ecore#//Limits">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//Limits/width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//Limits/length"/>
+    </genClasses>
+    <genClasses ecoreClass="LegoBricks2.ecore#//BrickModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegoBricks2.ecore#//BrickModel/contains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegoBricks2.ecore#//BrickModel/limits"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//BrickModel/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="LegoBricks2.ecore#//BrickElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegoBricks2.ecore#//BrickElement/dimensions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LegoBricks2.ecore#//BrickElement/getSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//BrickElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LegoBricks2.ecore#//AbstractBrick"/>
+    <genClasses ecoreClass="LegoBricks2.ecore#//ComplexBrick">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegoBricks2.ecore#//ComplexBrick/hasPosition"/>
+    </genClasses>
+    <genClasses ecoreClass="LegoBricks2.ecore#//Position">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//Position/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//Position/y"/>
+    </genClasses>
+    <genClasses ecoreClass="LegoBricks2.ecore#//Size">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//Size/brickHeight"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegoBricks2.ecore#//Size/brickWidth"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

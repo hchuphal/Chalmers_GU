@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="manufacturingSystem" nsURI="https://lab1.chalmers.se" nsPrefix="lab1.chalmers.se">
+  <eClassifiers xsi:type="ecore:EClass" name="ManufacturingSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manufacturingsteps" lowerBound="1"
+        upperBound="-1" eType="#//ManufacturingStep" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="storageFacilities" lowerBound="1"
+        upperBound="-1" eType="#//Storage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endpoint" lowerBound="1"
+        eType="#//Storage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startpoint" lowerBound="1"
+        eType="#//Storage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ManufacturingStep" eSuperTypes="#//EachStep">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transportsteps" lowerBound="1"
+        upperBound="-1" eType="#//TransportSteps" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualityassurance" eType="#//QualityAssurance"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manufacturingSeps" lowerBound="1"
+        upperBound="-1" eType="#//ManufacturingStep" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transportWorkPieces" lowerBound="1"
+        upperBound="-1" eType="#//TransportSteps"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ouputWorkpieces" lowerBound="1"
+        upperBound="-1" eType="#//WorkPieces"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputWorkpieces" lowerBound="1"
+        upperBound="-1" eType="#//WorkPieces" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EachStep" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        defaultValueLiteral="0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ResponsiblePerson" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransportSteps" eSuperTypes="#//EachStep">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transports" lowerBound="1"
+        upperBound="-1" eType="#//WorkPieces"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QualityAssurance" eSuperTypes="#//EachStep"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkPieces">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="storedIn" lowerBound="1"
+        upperBound="-1" eType="#//Storage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Storage"/>
+</ecore:EPackage>

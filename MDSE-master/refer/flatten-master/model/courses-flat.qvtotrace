@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trace:Trace xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trace="http:///www.eclipse.org/m2m/qvt/operational/trace.ecore">
+  <traceRecords>
+    <mappingOperation name="transformPackage" package="Flatten" module="Flatten">
+      <runtimeMappingOperation href="platform:/resource/flatten/transforms/xx/qvt/flatten/Flatten.qvtox#//transformPackage"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Package">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses.uml#_SswVQZ_pEeC99rgH7bQD4g"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Package">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses-flat.uml#_aLOY8OSqEeKosM1B0QDsKg"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="copyDataType" package="Flatten" module="Flatten">
+      <runtimeMappingOperation href="platform:/resource/flatten/transforms/xx/qvt/flatten/Flatten.qvtox#//copyDataType"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="DataType">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses.uml#_Z_HIkJ_pEeC99rgH7bQD4g"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="DataType">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses-flat.uml#_aLOY8-SqEeKosM1B0QDsKg"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="copyOwnedProperty" package="Flatten" module="Flatten">
+      <runtimeMappingOperation href="platform:/resource/flatten/transforms/xx/qvt/flatten/Flatten.qvtox#//copyOwnedProperty"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Property">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses.uml#_c-zz4J_pEeC99rgH7bQD4g"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Property">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses-flat.uml#_aLOY9OSqEeKosM1B0QDsKg"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="copyPrimitiveType" package="Flatten" module="Flatten">
+      <runtimeMappingOperation href="platform:/resource/flatten/transforms/xx/qvt/flatten/Flatten.qvtox#//copyPrimitiveType"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="PrimitiveType">
+        <value>
+          <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="PrimitiveType">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses-flat.uml#_aLOY8eSqEeKosM1B0QDsKg"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+  <traceRecords>
+    <mappingOperation name="copyOwnedProperty" package="Flatten" module="Flatten">
+      <runtimeMappingOperation href="platform:/resource/flatten/transforms/xx/qvt/flatten/Flatten.qvtox#//copyOwnedProperty"/>
+    </mappingOperation>
+    <context>
+      <context name="self" type="Property">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses.uml#_d1ZdoJ_pEeC99rgH7bQD4g"/>
+        </value>
+      </context>
+    </context>
+    <parameters/>
+    <result>
+      <result kind="OUT" name="result" type="Property">
+        <value>
+          <modelElement href="platform:/resource/flatten/model/courses-flat.uml#_aLOY9eSqEeKosM1B0QDsKg"/>
+        </value>
+      </result>
+    </result>
+  </traceRecords>
+</trace:Trace>

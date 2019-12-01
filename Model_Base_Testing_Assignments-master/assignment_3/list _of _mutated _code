@@ -1,0 +1,34 @@
+
+Mutations in ND4J:
+BaseNDArray.java -- in deeplearning4j project
+/home/luckyluke/Projects/deeplearning4j/nd4j/nd4j-backends/nd4j-api-parent/nd4j-api/src/main/java/org/nd4j/linalg/api/ndarray
+
+ScalarAdd
+    @Override
+    public INDArray add(Number n) {
+        validateNumericalArray("add", false);
+        //Mutated here
+        Number k = -1;
+        n = k;
+        return addi(n, Nd4j.createUninitialized(Shape.pickPairwiseDataType(this.dataType(),     n),this.shape(), this.ordering()));
+    }
+
+
+
+Not jet running, but in process:
+Transpose
+    @Override
+    public INDArray permute(int... rearrange) {
+        Preconditions.checkArgument(rearrange.length == rank(), "Incorrect number of arguments for permute function:" +
+                " got arguments %s for rank %s array. Number of arguments must equal array rank", rearrange, rank());
+        Nd4j.getCompressor().autoDecompress(this);
+        boolean alreadyInOrder = true;
+        //IntBuffer shapeInfo = shapeInfo();
+        int rank = jvmShapeInfo.rank;
+        for (int i = 0;       i < rank-1;       i++) {
+            
+             if (rearrange[i] != i) {
+                alreadyInOrder = false;
+                break;
+            }
+        }

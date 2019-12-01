@@ -1,0 +1,42 @@
+#
+
+pluginName = LegoBricks2 Model Edit Support
+providerName = www.example.org
+
+_UI_CreateChild_text = {0}
+_UI_CreateChild_text2 = {1} {0}
+_UI_CreateChild_text3 = {1}
+_UI_CreateChild_tooltip = Create New {0} Under {1} Feature
+_UI_CreateChild_description = Create a new child of type {0} for the {1} feature of the selected {2}.
+_UI_CreateSibling_description = Create a new sibling of type {0} for the selected {2}, under the {1} feature of their parent.
+
+_UI_PropertyDescriptor_description = The {0} of the {1}
+
+_UI_Limits_type = Limits
+_UI_BrickModel_type = Brick Model
+_UI_BrickElement_type = Brick Element
+_UI_AbstractBrick_type = Abstract Brick
+_UI_ComplexBrick_type = Complex Brick
+_UI_Position_type = Position
+_UI_Size_type = Size
+_UI_Unknown_type = Object
+
+_UI_Unknown_datatype= Value
+
+_UI_Limits_width_feature = Width
+_UI_Limits_length_feature = Length
+_UI_BrickModel_contains_feature = Contains
+_UI_BrickModel_limits_feature = Limits
+_UI_BrickModel_name_feature = Name
+_UI_BrickElement_dimensions_feature = Dimensions
+_UI_BrickElement_getSize_feature = Get Size
+_UI_BrickElement_name_feature = Name
+_UI_ComplexBrick_hasPosition_feature = Has Position
+_UI_Position_coordinates_feature = Coordinates
+_UI_Size_brickHeight_feature = Brick Height
+_UI_Size_brickWidth_feature = Brick Width
+_UI_Unknown_feature = Unspecified
+
+_UI_BrickPosition_Left_literal = Left
+_UI_BrickPosition_Right_literal = Right
+_UI_BrickPosition_Center_literal = Center

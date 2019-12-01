@@ -1,0 +1,65 @@
+appendix D, chapter 6 and slide 4a constraints.
+
+example.xmi, OCL console
+
+1. Evaluating:
+manufacturingSystem::ManufacturingSystem
+Results:
+manufacturingSystem::ManufacturingSystem
+
+Evaluating:
+consistsOf.transition
+Results:
+Manufacturing System FurnitureSystem::Composite Manufacturing Step CuttingComposite
+Manufacturing System FurnitureSystem::Transport Step StartStorageTransport
+Manufacturing System FurnitureSystem::Composite Manufacturing Step CuttingComposite
+Manufacturing System FurnitureSystem::Composite Manufacturing Step CuttingComposite::Manufacturing System ComponentPreparationSystem1::Manufacturing Step Cutting
+Manufacturing System FurnitureSystem::Quality Assurance Step productQA
+Manufacturing System FurnitureSystem::Transport Step CuttingCompositeTransport
+Manufacturing System FurnitureSystem::Storage Point ProductStorage
+Manufacturing System FurnitureSystem::Storage Point RawMaterialStorage
+
+
+2. Evaluating:
+ManufacturingSystem
+Results:
+manufacturingSystem::ManufacturingSystem
+
+Evaluating:
+self.consistsOf->forAll(m:ManufacturingSystemElement| m.name <> null)
+Results:
+true
+
+
+
+3. Evaluating:
+ManufacturingSystem
+Results:
+manufacturingSystem::ManufacturingSystem
+
+Evaluating:
+consistsOf
+->select(oclIsKindOf(Step)).oclAsType(Step).speed->sum()
+Results:
+70
+
+
+5. Evaluating:
+CompositeManufacturingStep
+Results:
+manufacturingSystem::CompositeManufacturingStep
+
+Evaluating:
+self.transition->exists(m:ManufacturingSystemElement|
+oclIsTypeOf(QualityAssuranceStep)) implies self.oclIsKindOf(ManufacturingStep)
+Results:
+true
+
+
+6. Evaluating:
+WorkPieceType
+Results:
+manufacturingSystem::WorkPieceType
+self.oclType().allInstances()
+->forAll(ms:ManufacturingSystem|ms.transforms.hasType
+->includes(self) implies ms.uses->includes(self)) --- ERRORS

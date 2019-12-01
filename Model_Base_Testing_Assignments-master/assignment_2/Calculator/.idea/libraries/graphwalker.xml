@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="graphwalker">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/graphwalker.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-4.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/modeljunit-2.5-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/graphwalker.jar!/" />
+    </SOURCES>
+  </library>
+</component>

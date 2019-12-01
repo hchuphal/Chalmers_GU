@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="mkl-2019.3-1.5-macosx-x86_64">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/mkl-2019.3-1.5-macosx-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mkl-2019.3-1.5-windows-x86.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mkl-2019.3-1.5-windows-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mkl-dnn-0.18.1-1.5-macosx-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mkl-dnn-0.18.1-1.5-windows-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/nd4j-native-1.0.0-beta4-macosx-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/nd4j-native-1.0.0-beta4-windows-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/openblas-0.3.5-1.5-ios-arm64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/openblas-0.3.5-1.5-ios-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/openblas-0.3.5-1.5-macosx-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/openblas-0.3.5-1.5-windows-x86.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/openblas-0.3.5-1.5-windows-x86_64.jar!/" />
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/main/java" />
+      <root url="file://$PROJECT_DIR$/src/test/java" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/nd4jtesting.iml" filepath="$PROJECT_DIR$/nd4jtesting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../assignment_3/pbtnd4j/pbtnd4j.iml" filepath="$PROJECT_DIR$/../../assignment_3/pbtnd4j/pbtnd4j.iml" />
+    </modules>
+  </component>
+</project>

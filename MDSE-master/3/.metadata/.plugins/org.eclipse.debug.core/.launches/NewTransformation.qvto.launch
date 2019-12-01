@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate">
+<booleanAttribute key="auto-build" value="false"/>
+<booleanAttribute key="console-trace" value="false"/>
+<stringAttribute key="direction" value="NONE"/>
+<booleanAttribute key="dot-graphs" value="false"/>
+<stringAttribute key="genmodel" value="platform:/resource/MtoMTransform/transforms/NewTransformation.genmodel"/>
+<mapAttribute key="in"/>
+<mapAttribute key="intermediates"/>
+<booleanAttribute key="interpreted" value="true"/>
+<stringAttribute key="mode" value="ENFORCE - CREATE"/>
+<mapAttribute key="old-in"/>
+<mapAttribute key="old-out"/>
+<mapAttribute key="out"/>
+<stringAttribute key="project" value="MtoMTransform"/>
+<stringAttribute key="tx" value="platform:/resource/MtoMTransform/transforms/NewTransformation.qvto"/>
+<booleanAttribute key="view" value="false"/>
+<booleanAttribute key="yed-graphs" value="false"/>
+</launchConfiguration>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Package xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_aLOY8OSqEeKosM1B0QDsKg" name="Model">
+  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_aLOY8eSqEeKosM1B0QDsKg" name="String">
+    <ownedComment xmi:id="_aLOY8uSqEeKosM1B0QDsKg" annotatedElement="_aLOY8eSqEeKosM1B0QDsKg">
+      <body>A string is a sequence of characters in some suitable character set used to display information about the model. Character sets may include non-Roman alphabets and characters.</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:DataType" xmi:id="_aLOY8-SqEeKosM1B0QDsKg" name="FullName">
+    <ownedAttribute xmi:id="_aLOY9OSqEeKosM1B0QDsKg" name="firstName" type="_aLOY8eSqEeKosM1B0QDsKg"/>
+    <ownedAttribute xmi:id="_aLOY9eSqEeKosM1B0QDsKg" name="lastName" type="_aLOY8eSqEeKosM1B0QDsKg"/>
+  </packagedElement>
+</uml:Package>

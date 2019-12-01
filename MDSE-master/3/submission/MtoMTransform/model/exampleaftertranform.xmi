@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assignbeforecom.chalmers:ManufacturingSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:assignbeforecom.chalmers="assignbefore.com.chalmers.manufacturingSystem" xsi:schemaLocation="assignbefore.com.chalmers.manufacturingSystem manufacturingSystem.ecore" start="//@consistsOf.0" end="//@consistsOf.4" name="FurnitureSystem" responsible="//@staff.3">
+  <consistsOf xsi:type="assignbeforecom.chalmers:StoragePoint" name="RawMaterialStorage" responsible="//@staff.3" stores="//@uses.0 //@uses.1">
+    <transition href="example.xmi#//@consistsOf.0"/>
+    <transition href="#//@consistsOf.1"/>
+  </consistsOf>
+  <consistsOf xsi:type="assignbeforecom.chalmers:TransportStep" name="StartStorageTransport" responsible="//@staff.3" speed="20">
+    <transition href="example.xmi#//@consistsOf.0"/>
+    <transition href="example.xmi#//@consistsOf.0/@contains/@consistsOf.2"/>
+    <input xsi:type="assignbeforecom.chalmers:BinaryCondition" left="//@consistsOf.1/@input.1" right="//@consistsOf.1/@input.2" type="or"/>
+    <input xsi:type="assignbeforecom.chalmers:WorkPieceCondition" name="StartWoodTrans" requiresType="//@uses.0"/>
+    <input xsi:type="assignbeforecom.chalmers:WorkPieceCondition" name="StartMetalTrans" requiresType="//@uses.1"/>
+    <output outputTypes="//@uses.1" input="//@consistsOf.1/@input.2"/>
+    <output outputTypes="//@uses.0" input="//@consistsOf.1/@input.1"/>
+  </consistsOf>
+  <consistsOf xsi:type="assignbeforecom.chalmers:QualityAssuranceStep" transition="//@consistsOf.3" name="productQA" responsible="//@staff.1" speed="10">
+    <input xsi:type="assignbeforecom.chalmers:BinaryCondition" left="//@consistsOf.2/@input.1" right="//@consistsOf.2/@input.2" type="or"/>
+    <input xsi:type="assignbeforecom.chalmers:WorkPieceCondition" name="qa_wood" requiresType="//@uses.2"/>
+    <input xsi:type="assignbeforecom.chalmers:WorkPieceCondition" name="qa_metal" requiresType="//@uses.3"/>
+    <output outputTypes="//@uses.2" input="//@consistsOf.2/@input.1"/>
+    <output outputTypes="//@uses.3" input="//@consistsOf.2/@input.2"/>
+  </consistsOf>
+  <consistsOf xsi:type="assignbeforecom.chalmers:TransportStep" transition="//@consistsOf.4" name="CuttingCompositeTransport" responsible="//@staff.0" speed="20">
+    <input xsi:type="assignbeforecom.chalmers:BinaryCondition" left="//@consistsOf.3/@input.1" right="//@consistsOf.3/@input.2" type="or"/>
+    <input xsi:type="assignbeforecom.chalmers:WorkPieceCondition" name="final_wood" requiresType="//@uses.2"/>
+    <input xsi:type="assignbeforecom.chalmers:WorkPieceCondition" name="final_metal" requiresType="//@uses.3"/>
+    <output outputTypes="//@uses.2" input="//@consistsOf.3/@input.1"/>
+    <output outputTypes="//@uses.3" input="//@consistsOf.3/@input.2"/>
+  </consistsOf>
+  <consistsOf xsi:type="assignbeforecom.chalmers:StoragePoint" transition="//@consistsOf.0" name="ProductStorage" responsible="//@staff.3" stores="//@uses.2 //@uses.3"/>
+  <uses name="Wood"/>
+  <uses name="Metal"/>
+  <uses name="WoodProduct"/>
+  <uses name="MetalProduct"/>
+  <uses name="CutMetal"/>
+  <uses name="CutWood"/>
+  <transforms hasType="//@uses.1"/>
+  <transforms hasType="//@uses.1"/>
+  <transforms hasType="//@uses.1"/>
+  <transforms hasType="//@uses.0"/>
+  <transforms hasType="//@uses.0"/>
+  <staff name="Lisa"/>
+  <staff name="Emma"/>
+  <staff name="Peter"/>
+  <staff name="Matt"/>
+</assignbeforecom.chalmers:ManufacturingSystem>

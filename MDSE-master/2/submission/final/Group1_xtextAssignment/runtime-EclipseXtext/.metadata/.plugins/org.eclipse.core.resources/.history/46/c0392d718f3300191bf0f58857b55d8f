@@ -1,0 +1,14 @@
+ManufacturingSystem nhj
+{ 
+	set start storage RawMaterial;
+	set end storage ProcessedMats;
+	set leadEngineer Kris;
+	initiate TransportStep name{
+		set speed 10
+		transition (name)
+		input {InputCondition Tralalal} 
+		output {OutputDecision { input condition Tralalal } } } { use WorkPiece WorkPieceType  
+	}
+}
+
+

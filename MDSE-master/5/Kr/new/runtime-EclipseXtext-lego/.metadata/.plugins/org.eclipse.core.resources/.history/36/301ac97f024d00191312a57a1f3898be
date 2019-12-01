@@ -1,0 +1,20 @@
+BrickModel legoBricks
+{
+	contains {AbstractBrick abstractBrick {dimensions 
+		Size {
+			brickHeight 5 
+			brickWidth 10
+		}
+	},
+		 ComplexBrick complexBrick {
+		 	dimensions Size {
+		 		brickHeight 5 
+		 		brickWidth 10
+		 		
+		 	}
+		 }
+		 
+	} 
+	limits Limits{length 20 }
+	
+}

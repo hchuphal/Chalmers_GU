@@ -1,0 +1,12 @@
+ManuSystem -> storage_1
+ManuSystem -> storage_2
+ManuSystem -> Manufacturing_Step1
+ManuSystem -> Manufacturing_Step2
+ManuSystem -> transportPoint_wagon
+ManuSystem -> QA_1
+0
+ 
+storage_1 -> Manufacturing_Step1
+0
+storage_2 -> Manufacturing_Step2
+0

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Move &apos;test.aird&apos; to &apos;model&apos;" description="Move &apos;test.aird&apos; to &apos;model&apos;" destination="model" element1="test.aird" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1552375139694" updateReferences="true"/>&#x0A;<refactoring comment="Move &apos;test.ecore&apos; to &apos;model&apos;" description="Move &apos;test.ecore&apos; to &apos;model&apos;" destination="model" element1="test.ecore" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1552375143760" updateReferences="true"/>
+</session>

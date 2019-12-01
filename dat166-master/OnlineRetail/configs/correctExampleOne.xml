@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+    <feature automatic="selected" name="OnlineRetail"/>
+    <feature automatic="selected" name="Storage System"/>
+    <feature automatic="unselected" name="Remote database"/>
+    <feature automatic="selected" manual="selected" name="Database Included"/>
+    <feature manual="selected" name="Statistics and Analysis Tools"/>
+    <feature automatic="selected" name="Item Management"/>
+    <feature automatic="selected" name="Item Editor"/>
+    <feature automatic="selected" name="Order Management"/>
+    <feature automatic="selected" manual="selected" name="Customer Relation Management"/>
+    <feature manual="selected" name="Ratings"/>
+    <feature manual="selected" name="Reviews"/>
+    <feature manual="selected" name="Connect to Social Media"/>
+    <feature automatic="selected" name="Customer Account Management"/>
+</configuration>

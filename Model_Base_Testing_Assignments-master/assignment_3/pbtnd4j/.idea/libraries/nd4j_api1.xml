@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="nd4j-api1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib_mutated/nd4j-api.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

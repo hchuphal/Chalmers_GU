@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+    <properties/>
+    <struct>
+        <and mandatory="true" name="OnlineEnterpriseProductLine">
+            <feature mandatory="true" name="OnlineEnterpriseAdministrator"/>
+            <and abstract="true" mandatory="true" name="OnlineEnterpriseServices">
+                <and abstract="true" name="InventoryManagement">
+                    <feature name="AddItem"/>
+                    <feature name="DeleteItem"/>
+                    <feature name="UpdateDescription"/>
+                </and>
+                <feature name="CustomerManagement"/>
+                <and abstract="true" mandatory="true" name="OrderManagement">
+                    <feature name="StatusTacking"/>
+                    <and mandatory="true" name="OrderBooking">
+                        <alt abstract="true" mandatory="true" name="Confirmation">
+                            <feature name="Email"/>
+                            <feature name="sms"/>
+                        </alt>
+                    </and>
+                    <alt abstract="true" mandatory="true" name="OnlinePayment">
+                        <feature name="BankTransfer"/>
+                        <feature name="Card"/>
+                    </alt>
+                </and>
+                <feature mandatory="true" name="SalesMonitoring"/>
+                <and abstract="true" mandatory="true" name="EnterpriseFontends">
+                    <feature mandatory="true" name="Checkout"/>
+                    <feature mandatory="true" name="ShoppingCart"/>
+                    <feature mandatory="true" name="FrontendLayout"/>
+                    <feature mandatory="true" name="FrontendAdmin"/>
+                </and>
+                <and abstract="true" name="Marketing">
+                    <feature name="SocialMedia"/>
+                    <feature name="Reviews"/>
+                </and>
+            </and>
+        </and>
+    </struct>
+    <constraints/>
+    <calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+    <comments/>
+    <featureOrder userDefined="false"/>
+</featureModel>

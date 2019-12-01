@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/3/Group1_xtextAssignment"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/bit/itu-square-mdsebook-12dc44b4454e"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/2/assignment1"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/lab1/lab1.mdse.industrialManSys"/>
+	</list>
+	<section name="org.eclipse.ui.internal.ide.dialogs.ProjectContentsLocationArea">
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/refer/lab1.mdse.industrialManSys" key="OUTSIDE_LOCATION"/>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.ui.wizards.new.project" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
+	</section>
+</section>

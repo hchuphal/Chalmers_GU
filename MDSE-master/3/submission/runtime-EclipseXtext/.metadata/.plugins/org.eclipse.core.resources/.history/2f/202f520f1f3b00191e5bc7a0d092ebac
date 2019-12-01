@@ -1,0 +1,17 @@
+ManuSystem -> storage_1
+ManuSystem -> Willies
+ManuSystem -> storage_2
+ManuSystem -> Charlie
+ManuSystem -> Manufacturing_Step1
+ManuSystem -> Mike
+ManuSystem -> Manufacturing_Step2
+ManuSystem -> Charlie
+ManuSystem -> transportPoint_wagon
+ManuSystem -> Willies
+ManuSystem -> QA_1
+ManuSystem -> Willies
+ 
+storage_1 -> Manufacturing_Step1
+storage_1 -> Charlie
+storage_2 -> Manufacturing_Step2
+storage_2 -> Mike

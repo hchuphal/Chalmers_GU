@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+    <properties/>
+    <struct>
+        <and abstract="true" mandatory="true" name="OnlineRetail">
+            <alt abstract="true" mandatory="true" name="Storage System">
+                <feature name="Remote database"/>
+                <feature name="Database Included"/>
+            </alt>
+            <feature name="Statistics and Analysis Tools"/>
+            <and abstract="true" mandatory="true" name="Item Management">
+                <feature mandatory="true" name="Item Editor"/>
+                <feature name="Import / Export Items"/>
+            </and>
+            <feature mandatory="true" name="Order Management"/>
+            <or abstract="true" name="Customer Relation Management">
+                <feature name="Ratings"/>
+                <feature name="Reviews"/>
+                <feature name="Newsletters"/>
+                <feature name="Connect to Social Media"/>
+            </or>
+            <feature name="Customer Account Management"/>
+            <or abstract="true" name="Promotions and Sales">
+                <feature name="General sale"/>
+                <feature name="Personal Coupons"/>
+            </or>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <imp>
+                <var>Statistics and Analysis Tools</var>
+                <var>Database Included</var>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <disj>
+                    <var>Newsletters</var>
+                    <disj>
+                        <var>Personal Coupons</var>
+                        <disj>
+                            <var>Ratings</var>
+                            <var>Reviews</var>
+                        </disj>
+                    </disj>
+                </disj>
+                <var>Customer Account Management</var>
+            </imp>
+        </rule>
+    </constraints>
+    <calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+    <comments/>
+    <featureOrder userDefined="false"/>
+</featureModel>

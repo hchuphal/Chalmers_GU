@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+org.eclipse.emf.exporter.ui.contribution.ModelExporterManager=org.eclipse.xsd.ecore.exporter
+org.eclipse.emf.importer.ui.contribution.ModelImporterManager=org.eclipse.emf.importer.ecore

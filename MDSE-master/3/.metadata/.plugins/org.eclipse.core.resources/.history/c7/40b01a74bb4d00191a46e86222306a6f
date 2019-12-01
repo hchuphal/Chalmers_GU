@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="brickModel2" nsURI="com.chalmers" nsPrefix="com.chalmers.brickModel2">
+  <eClassifiers xsi:type="ecore:EClass" name="Limits">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BrickModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"
+        eType="#//BrickElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="limits" lowerBound="1"
+        eType="#//Limits" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BrickElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dimensions" eType="#//Size"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="getSize" upperBound="-1"
+        eType="#//BrickElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractBrick" eSuperTypes="#//BrickElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexBrick" eSuperTypes="#//BrickElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPosition" upperBound="-1"
+        eType="#//Position" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Position">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coordinates" eType="#//BrickPosition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BrickPosition">
+    <eLiterals name="Left"/>
+    <eLiterals name="Right" value="1"/>
+    <eLiterals name="Center" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Size">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="brickHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="brickWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>

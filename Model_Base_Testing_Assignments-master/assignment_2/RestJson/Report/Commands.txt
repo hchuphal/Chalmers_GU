@@ -1,0 +1,12 @@
+java -jar graphwalker-cli-3.4.2.jar offline --start-element e_POST --model yourModel.graphml "random(edge_coverage(100))"
+
+mvn graphwalker:generate-sources
+
+export PATH=/opt/apache-maven/bin:$PATH
+
+References:
+
+
+http://graphwalker.github.io/rest-overview/
+
+

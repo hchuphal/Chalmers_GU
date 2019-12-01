@@ -1,0 +1,4 @@
+storage_1
+storage_1 -> Manufacturing_Step2
+storage_2
+storage_2 -> Manufacturing_Step1

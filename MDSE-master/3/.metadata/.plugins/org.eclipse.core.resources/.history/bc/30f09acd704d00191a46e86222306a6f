@@ -1,0 +1,55 @@
+BBricModel returns BrickModel:
+    'BrickModel'
+    name=EString
+    '{'
+        'limits' limits=Limits
+        (contains+=BrickElement (contains+=BrickElement)*)?
+    '}';
+ 
+BrickElement returns BrickElement:
+    AbstractBrick | ComplexBrick;
+ 
+ 
+Limits returns Limits:
+    {Limits}
+    'Limits'
+    '{'
+        ('width' width=EInt)?
+        ('height' length=EInt)?
+    '}';
+ 
+EString returns ecore::EString:
+    STRING | ID;
+ 
+Size returns Size:
+    {Size}
+        ('height' brickHeight=EInt)?
+        ('width' brickWidth=EInt)?
+    ;
+ 
+AbstractBrick returns AbstractBrick:
+    {AbstractBrick}
+    'abstract' 'Brick'
+    name=EString
+    '{'
+        ('Dimensions' ((getSize+=[BrickElement|EString] '.height' getSize+=[BrickElement|EString] '.width') | dimensions=Size))?
+    '}';
+ 
+ComplexBrick returns ComplexBrick:
+    {ComplexBrick}
+    'Brick'
+    name=EString
+    '{'
+        'createBrick' '{' 'Dimensions' '(' getSize+=[BrickElement|EString] ',' getSize+=[BrickElement] ',' hasPosition+=Position ( "," hasPosition+=Position)* ')' '}'
+    '}';
+ 
+EInt returns ecore::EInt:
+    '-'? INT;
+ 
+Position returns Position:
+    {Position}
+        (coordinates=BrickPosition)?
+    ;
+ 
+enum BrickPosition returns BrickPosition:
+                Left = 'Left' | Right = 'Right' | Center = 'Center';

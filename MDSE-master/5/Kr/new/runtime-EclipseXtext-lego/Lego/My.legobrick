@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.chalmers.lego:BrickModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.chalmers.lego="com.chalmers">
+  <contains xsi:type="com.chalmers.lego:ComplexBrick">
+    <dimensions/>
+  </contains>
+  <contains xsi:type="com.chalmers.lego:AbstractBrick"/>
+  <contains xsi:type="com.chalmers.lego:ComplexBrick"/>
+  <contains xsi:type="com.chalmers.lego:AbstractBrick"/>
+</com.chalmers.lego:BrickModel>

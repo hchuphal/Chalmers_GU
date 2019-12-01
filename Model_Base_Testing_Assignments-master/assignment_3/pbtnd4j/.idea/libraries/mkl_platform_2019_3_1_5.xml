@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mkl-platform-2019.3-1.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/mkl-platform-2019.3-1.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

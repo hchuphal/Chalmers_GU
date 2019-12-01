@@ -1,0 +1,17 @@
+ManuSystem -> storage_1
+ManuSystem -> Charlie
+ManuSystem -> storage_1
+ManuSystem -> Charlie
+ManuSystem -> storage_1
+ManuSystem -> Charlie
+ManuSystem -> storage_1
+ManuSystem -> Charlie
+ManuSystem -> storage_1
+ManuSystem -> Charlie
+ManuSystem -> storage_1
+ManuSystem -> Charlie
+ 
+storage_1 -> Manufacturing_Step1
+storage_1 -> Charlie
+storage_2 -> Manufacturing_Step2
+storage_2 -> Mike

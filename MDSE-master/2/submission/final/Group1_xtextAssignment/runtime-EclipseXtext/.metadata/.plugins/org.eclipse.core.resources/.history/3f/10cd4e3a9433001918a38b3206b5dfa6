@@ -1,0 +1,9 @@
+ManufacturingSystem ManuSys300
+{
+	set start raw;
+	set end processed;
+	initiate StoragePoint raw {}, StoragePoint processed {}
+	
+}
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.chalmers:ManufacturingSystem
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:com.chalmers="com.chalmers.manufacturingSystem"
+    xsi:schemaLocation="com.chalmers.manufacturingSystem manufacturingSystem.ecore">
+  <consistsOf
+      xsi:type="com.chalmers:ManufacturingStep"
+      transition="//@consistsOf.0"
+      name="ABC"
+      responsible="//@staff.1"
+      speed="80"/>
+  <consistsOf
+      xsi:type="com.chalmers:ManufacturingStep"
+      name="abc2"
+      responsible="//@staff.0"/>
+  <consistsOf
+      xsi:type="com.chalmers:ManufacturingStep"
+      name="ABC3"
+      responsible="//@staff.0"/>
+  <consistsOf
+      xsi:type="com.chalmers:ManufacturingStep"
+      name="ABC 4"
+      responsible="//@staff.2"/>
+  <consistsOf
+      xsi:type="com.chalmers:ManufacturingStep"
+      name="ABC 5"
+      responsible="//@staff.3"/>
+  <consistsOf
+      xsi:type="com.chalmers:ManufacturingStep"
+      name="ABC 6"
+      responsible="//@staff.2"/>
+  <staff name="Martin"/>
+  <staff name="kRIS"/>
+  <staff name="Himanshu"/>
+  <staff name="Rao"/>
+</com.chalmers:ManufacturingSystem>

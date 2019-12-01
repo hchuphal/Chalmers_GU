@@ -1,0 +1,58 @@
+ManufacturingSystem ManuSys300
+{
+    set start storage raw
+    set end storage processed
+    create responsible Mike, Charlie, Willies, Simon
+    set lead responsible Mike
+    workpiece type Wood, Metal, Stone
+    processes WorkPiece {of type Stone}, WorkPiece {of type Metal}
+   
+/*Way 1 - initiate each seperately */  
+    initiate StoragePoint raw {
+            set responsible Charlie
+            stores Stone
+    }  
+    initiate StoragePoint processed {
+            set responsible Willies
+            stores Metal
+            transition manuStep
+    }
+   
+   
+/*Way 2 - nest the manufacturing steps inside a single initiate */
+/*Note - increases complexity but reduces typing */
+    initiate {
+        StoragePoint something {
+            set responsible Charlie
+            stores Wood
+        }
+        StoragePoint another {
+            set responsible Willies
+        }
+        ManufacturingStep manuStep {
+            speed = 10
+            transition wagon, raw, qas
+            set responsible Charlie
+            input{InputCondition imp,
+                BinaryCondition cond {left imp or right imp}
+            }
+            output{input condition imp}
+        }
+        TransportStep wagon {
+            speed = 10
+            transition raw, processed
+            set responsible Simon
+            input {InputCondition imp}
+            output {input condition imp}
+        }
+        QualityAssuranceStep qas {
+            speed = 10
+            transition manuStep
+            set responsible Willies
+            input {InputCondition con}
+            output {input condition con}
+           
+        }
+    }
+   
+}

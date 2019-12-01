@@ -1,0 +1,21 @@
+ManuSystem -> storage_1
+ManuSystem -> [manufacturingSystem.impl.ResponsibleImpl@4666637e (name: Mike), manufacturingSystem.impl.ResponsibleImpl@5584cef0 (name: Charlie), manufacturingSystem.impl.ResponsibleImpl@34fc3b9c (name: Willies)]
+ManuSystem -> Charlie
+ManuSystem -> storage_2
+ManuSystem -> [manufacturingSystem.impl.ResponsibleImpl@4666637e (name: Mike), manufacturingSystem.impl.ResponsibleImpl@5584cef0 (name: Charlie), manufacturingSystem.impl.ResponsibleImpl@34fc3b9c (name: Willies)]
+ManuSystem -> Willies
+ManuSystem -> Manufacturing_Step1
+ManuSystem -> [manufacturingSystem.impl.ResponsibleImpl@4666637e (name: Mike), manufacturingSystem.impl.ResponsibleImpl@5584cef0 (name: Charlie), manufacturingSystem.impl.ResponsibleImpl@34fc3b9c (name: Willies)]
+ManuSystem -> Charlie
+ManuSystem -> Manufacturing_Step2
+ManuSystem -> [manufacturingSystem.impl.ResponsibleImpl@4666637e (name: Mike), manufacturingSystem.impl.ResponsibleImpl@5584cef0 (name: Charlie), manufacturingSystem.impl.ResponsibleImpl@34fc3b9c (name: Willies)]
+ManuSystem -> Mike
+ManuSystem -> transportPoint_wagon
+ManuSystem -> [manufacturingSystem.impl.ResponsibleImpl@4666637e (name: Mike), manufacturingSystem.impl.ResponsibleImpl@5584cef0 (name: Charlie), manufacturingSystem.impl.ResponsibleImpl@34fc3b9c (name: Willies)]
+ManuSystem -> Charlie
+ManuSystem -> QA_1
+ManuSystem -> [manufacturingSystem.impl.ResponsibleImpl@4666637e (name: Mike), manufacturingSystem.impl.ResponsibleImpl@5584cef0 (name: Charlie), manufacturingSystem.impl.ResponsibleImpl@34fc3b9c (name: Willies)]
+ManuSystem -> Willies
+ 		ManufacturingSystemElement
+storage_1 -> Manufacturing_Step1
+storage_1 -> Charlie

@@ -1,0 +1,15 @@
+ManuSystem -> storage_1
+ManuSystem -> manufacturingSystem.impl.ResponsibleImpl@47f064c4 (name: Willies)
+ManuSystem -> storage_2
+ManuSystem -> manufacturingSystem.impl.ResponsibleImpl@8e4597d (name: Charlie)
+ManuSystem -> Manufacturing_Step1
+ManuSystem -> manufacturingSystem.impl.ResponsibleImpl@28456f99 (name: Mike)
+ManuSystem -> Manufacturing_Step2
+ManuSystem -> manufacturingSystem.impl.ResponsibleImpl@8e4597d (name: Charlie)
+ManuSystem -> transportPoint_wagon
+ManuSystem -> manufacturingSystem.impl.ResponsibleImpl@47f064c4 (name: Willies)
+ManuSystem -> QA_1
+ManuSystem -> manufacturingSystem.impl.ResponsibleImpl@47f064c4 (name: Willies)
+ 
+storage_1 -> Manufacturing_Step1
+storage_2 -> Manufacturing_Step2

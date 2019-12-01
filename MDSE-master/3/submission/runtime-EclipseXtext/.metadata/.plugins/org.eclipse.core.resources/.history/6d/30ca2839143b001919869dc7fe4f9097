@@ -1,0 +1,21 @@
+Lindholmen_ManuSystem -> storage_1
+0
+Lindholmen_ManuSystem -> storage_2
+1
+Lindholmen_ManuSystem -> storage_2
+2
+Lindholmen_ManuSystem -> storage_2
+3
+Lindholmen_ManuSystem -> Manufacturing_Step1
+4
+Lindholmen_ManuSystem -> Manufacturing_Step2
+5
+Lindholmen_ManuSystem -> transportPoint_wagon
+6
+Lindholmen_ManuSystem -> QA_1
+0
+ 
+                storage_1 -> Manufacturing_Step2
+                0
+                storage_2 -> Manufacturing_Step1
+                0

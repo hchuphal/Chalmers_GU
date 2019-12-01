@@ -1,0 +1,4 @@
+//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.jdt.junit.launchconfig=org.eclipse.jdt.junit.launchconfig,run,;
+//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.m2m.qvt.oml.QvtTransformation=org.eclipse.m2m.qvt.oml.QvtTransformation,run,;
+eclipse.preferences.version=1
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<watchExpressions/>\n

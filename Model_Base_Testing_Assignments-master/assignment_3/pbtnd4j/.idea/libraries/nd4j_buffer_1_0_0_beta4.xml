@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="nd4j-buffer-1.0.0-beta4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/nd4j-buffer-1.0.0-beta4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated LegoBricks2 -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="brickModel2.presentation.BrickModel2ModelWizardID"
+            name="%_UI_BrickModel2ModelWizard_label"
+            class="brickModel2.presentation.BrickModel2ModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/BrickModel2ModelFile.gif">
+         <description>%_UI_BrickModel2ModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated LegoBricks2 -->
+      <editor
+            id="brickModel2.presentation.BrickModel2EditorID"
+            name="%_UI_BrickModel2Editor_label"
+            icon="icons/full/obj16/BrickModel2ModelFile.gif"
+            extensions="brickmodel2"
+            class="brickModel2.presentation.BrickModel2Editor"
+            contributorClass="brickModel2.presentation.BrickModel2ActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

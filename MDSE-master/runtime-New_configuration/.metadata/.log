@@ -1,0 +1,10 @@
+!SESSION 2019-03-23 00:17:06.015 -----------------------------------------------
+eclipse.buildId=4.10.0.I20181206-0815
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/3/../runtime-New_configuration -dev file:/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/3/.metadata/.plugins/org.eclipse.pde.core/New_configuration/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+
+!ENTRY org.eclipse.core.net 1 0 2019-03-23 00:17:16.401
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences

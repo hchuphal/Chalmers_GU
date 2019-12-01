@@ -1,0 +1,43 @@
+
+modeltype UML uses uml('http://www.eclipse.org/uml2/4.0.0/UML');
+
+transformation Flatten(in hierarchical : UML, out flat : UML);
+
+main() {
+
+	hierarchical.objectsOfType(Package).map transformPackage();	
+
+}
+
+mapping Package::transformPackage() : Package {
+	name := self.name;
+	nestedPackage += self.ownedElement[Package].map transformPackage();
+	packagedElement += self.ownedElement[DataType].map copyDataType();
+}
+
+mapping DataType::copyDataType() : DataType {
+	name := self.name;
+	ownedAttribute += self.ownedAttribute.map copyOwnedProperty();
+}
+
+mapping Property::copyOwnedProperty() : Property {
+	name := self.name;
+	type := self.type.map transformType();
+}
+
+mapping PrimitiveType::copyPrimitiveType() : PrimitiveType {
+	init {
+		result := self.deepclone().oclAsType(PrimitiveType);
+	}
+	
+	package := topLevelPackage();
+	
+}
+
+mapping Type::transformType() : Type 
+	disjuncts PrimitiveType::copyPrimitiveType, DataType::copyDataType;
+
+query topLevelPackage() : Package {
+	return flat.objectsOfType(Package)->any(nestingPackage.oclIsUndefined());
+}
+

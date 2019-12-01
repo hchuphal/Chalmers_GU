@@ -1,0 +1,111 @@
+ManufacturingSystem ManuSys300
+{
+	set start storage raw
+	set end storage processed
+	create responsible Mike, Charlie, Willies
+	set lead responsible Mike
+	workpiece type Wood, Metal, Stone
+	processes WorkPiece {of type Stone}, WorkPiece {of type Metal}
+
+/*Way 1 - initiate each seperately */	
+	initiate StoragePoint raw {
+			set responsible Charlie
+			stores Stone
+	}  
+	initiate StoragePoint processed {
+			set responsible Willies
+			stores Metal
+			transition manuStep
+	}
+	initiate CompositeManufacturingStep underling {
+			speed = 30
+			set responsible Willies
+			input {InputCondition imp}
+			output {input condition imp}
+			contains ManufacturingSystem ManuSys500{
+				set start storage rawMats
+				set end storage processedMats
+				create responsible Himanshu, Rick, Morty
+				set lead responsible Rick
+				workpiece type Glass, Plastic, Marble
+			
+				initiate StoragePoint rawMats{
+					set responsible Himanshu
+					stores Glass
+				}
+				initiate StoragePoint processedMats {
+					set responsible Morty
+					stores Marble
+				}
+				initiate ManufacturingStep melt {
+					speed = 10
+					set responsible Charlie
+					input{InputCondition imp, 
+						BinaryCondition cond {left imp or right imp}
+					}
+					output{input condition imp}
+				}
+		
+			}
+			
+	}
+	
+/*Way 2 - nest the manufacturing steps inside a single initiate */
+/*Note - increases complexity but reduces typing */
+	initiate {
+		StoragePoint something {
+			set responsible Charlie
+			stores Wood
+		}
+		StoragePoint another {
+			set responsible Willies
+		}
+		ManufacturingStep manuStep {
+			speed = 10
+			set responsible Charlie
+			input{InputCondition imp, 
+				BinaryCondition cond {left imp or right imp}
+			}
+			output{input condition imp}
+		}
+		TransportStep wagon {
+			speed = 10
+			set responsible Charlie
+			input {InputCondition imp}
+			output {input condition imp}
+		}
+		QualityAssuranceStep qas {
+			speed = 10
+			set responsible Willies
+			input {InputCondition con}
+			output {input condition con}
+			
+		}
+		CompositeManufacturingStep manu600 {
+			speed = 30
+			set responsible Willies
+			input {InputCondition imp}
+			output {input condition imp}
+			contains ManufacturingSystem ManuSys400 {
+				set start storage something
+				set end storage another
+				create responsible Kris, Supria
+				set lead responsible Kris
+				initiate ManufacturingStep CutWood {
+					speed = 20
+					set responsible Supria
+					input {InputCondition imp}
+					output {input condition imp}
+				}
+				initiate StoragePoint bang{
+					set responsible Supria
+				}
+			}
+		}
+	}
+	
+}
+
+
+
+

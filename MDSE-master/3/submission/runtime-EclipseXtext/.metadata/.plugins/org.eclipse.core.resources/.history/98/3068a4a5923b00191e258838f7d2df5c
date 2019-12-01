@@ -1,0 +1,25 @@
+ManuSys300 -> raw
+ManuSys300 -> processed
+ManuSys300 -> something
+ManuSys300 -> another
+ManuSys300 -> manuStep
+ManuSys300 -> wagon
+ManuSys300 -> qas
+ManuSys300 -> Mike
+ManuSys300 -> Wood
+ManuSys300 -> Metal
+ManuSys300 -> Stone
+
+processed -> manuStep
+processed -> Willies
+manuStep -> wagon
+manuStep -> raw
+manuStep -> wagon
+manuStep -> wagon
+manuStep -> Charlie
+wagon -> raw
+wagon -> raw
+wagon -> raw
+wagon -> Simon
+qas -> manuStep
+qas -> Willies

@@ -1,0 +1,210 @@
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(0.75, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));					 
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(3.5, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(6.25, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(9.0, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(0.75, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));					 
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(3.5, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(6.25, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(9.0, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(0.75, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));					 
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(3.5, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(6.25, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(9.0, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Top Line
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(0.75, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(0.75,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(3.5, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(3.5,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(6.25, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(6.25,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(9.0, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(9.0,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//left wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(-0.6, 1.4,0.85);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Right wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(10.4, 1.4,0.85);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//left wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(-0.6, 1.4,3.6);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Right wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(10.4, 1.4,3.6);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//left wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(-0.6, 1.4,6.35);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Right wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(10.4, 1.4,6.35);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(0.75, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));					 
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(3.5, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(6.25, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(9.0, 0, 0.75);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(0.75, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));					 
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(3.5, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(6.25, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(9.0, 0, 3.5);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(0.75, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));					 
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(3.5, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(6.25, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+tube = new Cylinder(0.75, 1, 1, 1);
+pos = new Vec3(9.0, 0, 6.25);
+script.addObject(tube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Top Line
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(0.75, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(0.75,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(3.5, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(3.5,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(6.25, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(6.25,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//bottom wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(9.0, 1.4,-0.6 );
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//top wall
+cube = new Cube(2.9, 2, 0.25);
+pos = new Vec3(9.0,1.4, 7.65);
+	                script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+//left wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(-0.6, 1.4,0.85);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Right wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(10.4, 1.4,0.85);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//left wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(-0.6, 1.4,3.6);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Right wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(10.4, 1.4,3.6);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//left wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(-0.6, 1.4,6.35);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+//Right wall
+cube = new Cube(0.25, 2, 2.9);
+pos = new Vec3(10.4, 1.4,6.35);
+script.addObject(cube, new CoordinateSystem(pos, 0, 0, 0));
+
+                  // Connect other Brick to :: x= 2 y= 1 z=2 for brick No 0
+

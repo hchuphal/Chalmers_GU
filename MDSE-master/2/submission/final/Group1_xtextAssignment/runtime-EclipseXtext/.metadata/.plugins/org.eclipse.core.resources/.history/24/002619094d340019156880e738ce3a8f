@@ -1,0 +1,18 @@
+ManufacturingSystem ManuSys300
+{
+	set start storage raw
+	set end storage processed
+	set lead responsible Mike
+	create responsible Mike, Charlie, Willies
+	
+	initiate StoragePoint raw {
+		responsible Charlie
+	}, StoragePoint processed {
+		responsible Willies
+	}
+	
+}
+
+
+
+

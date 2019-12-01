@@ -1,0 +1,30 @@
+modeltype manf "strict" uses 'assignbefore.com.chalmers.manufacturingSystem';
+	
+transformation NewTransformation(in srcModel:manf, out destModel:manf);
+
+main() 
+{
+srcModel.rootObjects()[ManufacturingSystem] -> map ManSys2ManSys(); 
+}
+
+mapping ManufacturingSystem::ManSys2ManSys(): ManufacturingSystem
+{
+  name:=self.name;
+  start:=self.start;
+  _end:= self._end;
+  staff:=self.staff;
+  responsible:= self.responsible;
+  _uses:= self._uses;   
+  transforms:= self.transforms;	
+  self.consistsOf-> forEach(elem){
+   	if (elem.oclIsKindOf(CompositeManufacturingStep)) then {
+   		var flatten := self.allSubobjectsOfType(CompositeManufacturingStep)->asOrderedSet();
+   			consistsOf+= flatten.contains.consistsOf;
+   			}
+   	else{
+   			consistsOf+= elem;
+   		}
+   	endif;
+   };
+}
+

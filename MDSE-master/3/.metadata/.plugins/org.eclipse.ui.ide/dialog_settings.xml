@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/5/Kr/new/MDE_Assignment5.1"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/check/check"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/5/MDE_Assignment5"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/refer/flatten-master"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/exam/mdsebook.firealarmsystem"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/3/MtoMTransform"/>
+		<item value="/Users/hchuphal/Desktop/Gu.SE/SP3/Model_Driven_Engineering/assignments/3"/>
+	</list>
+	<section name="NewWizardAction">
+	</section>
+</section>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lab1.chalmers.se:ManufacturingSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:lab1.chalmers.se="https://lab1.chalmers.se">
+  <manufacturingsteps>
+    <transportsteps/>
+    <transportsteps/>
+    <transportsteps/>
+    <qualityassurance/>
+    <manufacturingSeps/>
+  </manufacturingsteps>
+  <manufacturingsteps/>
+  <storageFacilities/>
+</lab1.chalmers.se:ManufacturingSystem>

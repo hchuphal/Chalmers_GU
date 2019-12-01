@@ -1,0 +1,29 @@
+BrickModel model {
+    limits Limits {
+        width 10
+        length 10
+    }
+    }
+     Brick D1 {
+        Dimensions
+            height 2
+            width 2
+    }
+    abstract Brick D2 {
+        Dimensions
+        D1.height
+        D1.width
+    }
+   
+    abstract Brick D3 {
+        Dimensions
+        D1.height
+        D2.width
+    }
+   
+    Brick D4 {
+        createBrick{
+            Dimensions(D1, D2, Center, Left)
+        }
+    }
+}

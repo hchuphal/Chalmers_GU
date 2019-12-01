@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="openblas-0.3.5-1.5-android-arm">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/openblas-0.3.5-1.5-android-arm.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

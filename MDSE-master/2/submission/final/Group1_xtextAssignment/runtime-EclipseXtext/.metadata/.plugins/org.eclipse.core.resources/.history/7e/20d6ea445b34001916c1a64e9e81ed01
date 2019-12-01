@@ -1,0 +1,35 @@
+ManufacturingSystem ManuSys300
+{
+	set start storage raw
+	set end storage processed
+	create responsible Mike, Charlie, Willies
+	set lead responsible Mike
+
+/*Way 1 - initiate each seperately */	
+	initiate StoragePoint raw {
+			set responsible Charlie
+	};  
+	initiate StoragePoint processed {
+			set responsible Willies
+	};
+/*Way 2 - nest the manufacturing steps inside a single initiate */
+	initiate {
+		StoragePoint something {
+			set responsible Charlie
+		},
+		StoragePoint another {
+			set responsible Willies
+		},
+		ManufacturingStep manuStep {
+			speed = 10
+			set responsible Charlie
+			input{InputCondition imp}
+			output{OutputDecision{input condition imp}}
+		}
+	}
+	
+}
+
+
+
+

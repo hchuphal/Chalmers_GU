@@ -1,0 +1,83 @@
+import ecore : 'http://www.eclipse.org/emf/2002/Ecore' ;
+
+package manufacturingSystem : _'com.chalmers' = 'com.chalmers.manufacturingSystem'
+{
+	class WorkPiece
+	{
+		property hasType : WorkPieceType[1];
+	}
+	class ManufacturingStep extends Step;
+	class ManufacturingSystem
+	{
+		property consistsOf : ManufacturingSystemElement[+|1] { ordered composes };
+		property start : StoragePoint[+|1] { ordered };
+		property end : StoragePoint[+|1] { ordered };
+		property uses : WorkPieceType[*|1] { ordered composes };
+		property transforms : WorkPiece[*|1] { ordered composes };
+		attribute name : String[?];
+		property responsible : Responsible[?];
+		property staff : Responsible[*|1] { ordered composes };
+		invariant oneResponsible: self.consistsOf ->forAll(m:ManufacturingSystemElement| m.responsible -> size() = 1);
+		invariant limitResponsible: self.consistsOf -> forAll(m:ManufacturingSystemElement| m.responsible.name <> self.responsible.name);
+		invariant startLimit: self.start.transition -> select(oclIsKindOf(Step)) ->isEmpty();
+	
+	}
+	class TransportStep extends Step;
+	class QualityAssuranceStep extends Step;
+	abstract class Step extends ManufacturingSystemElement
+	{
+		attribute speed : ecore::EInt[1] = '0';
+		property input : InputCondition[+|1] { ordered composes };
+		property output : OutputDecision[+|1] { ordered composes };
+	}
+	class Responsible
+	{
+		attribute name : String[?];
+	}
+	enum BinaryType { serializable }
+	{
+		literal _'and';
+		literal _'or' = 1;
+	}
+	class InputCondition
+	{
+		attribute name : String[?];
+	}
+	class StoragePoint extends ManufacturingSystemElement
+	{
+		property stores : WorkPieceType[*|1] { ordered };
+	}
+	class ManufacturingSystemElement
+	{
+		property transition : ManufacturingSystemElement[*|1] { ordered };
+		attribute name : String[?];
+		property responsible : Responsible[?];
+	}
+	class CompositeManufacturingStep extends Step
+	{
+		property contains : ManufacturingSystem[1] { composes };
+	}
+	class WorkPieceType
+	{
+		attribute name : String[?];
+	}
+	class OutputDecision
+	{
+		property outputTypes : WorkPieceType[?];
+		property input : InputCondition[+|1] { ordered };
+	}
+	class WorkPieceCondition extends InputCondition
+	{
+		property requiresType : WorkPieceType[1];
+	}
+	class BinaryCondition extends InputCondition
+	{
+		property left : InputCondition[1];
+		property right : InputCondition[1];
+		attribute type : BinaryType[1];
+	}
+	class Negation extends InputCondition
+	{
+		property contains : InputCondition[1];
+	}
+}

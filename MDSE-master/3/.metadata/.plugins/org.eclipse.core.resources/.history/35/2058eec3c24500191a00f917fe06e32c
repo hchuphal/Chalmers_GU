@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="LegoBrick" nsURI="com.chalmers" nsPrefix="com.chalmers.lego">
+  <eClassifiers xsi:type="ecore:EClass" name="BasicBrick" eSuperTypes="#//Size">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bricks" lowerBound="1"
+        upperBound="-1" eType="#//BasicBrick" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BrickModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasComplex" lowerBound="1"
+        upperBound="-1" eType="#//ComplexBrick" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="limits" lowerBound="1"
+        eType="#//Limits" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Size" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Limits" eSuperTypes="#//Size"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexBrick">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assemble" eType="#//ComplexBrick"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="basicbrick" lowerBound="1"
+        upperBound="-1" eType="#//BasicBrick"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assembly">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="brickWidth" lowerBound="1"
+        eType="#//BasicBrick"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="position" lowerBound="1"
+        eType="#//BasicBrick"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="brickLength" lowerBound="1"
+        eType="#//BasicBrick"/>
+  </eClassifiers>
+</ecore:EPackage>
